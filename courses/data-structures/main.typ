@@ -20,11 +20,19 @@
 #outline(indent: auto)
 #pagebreak()
 
+// Chapters: each starts on a new page
 #include "notes/amortized_analysis.typ"
+#pagebreak()
 #include "notes/splay_trees.typ"
+#pagebreak()
 #include "notes/ab_trees.typ"
+#pagebreak()
 #include "notes/cache_algorithms.typ"
+#pagebreak()
 #include "notes/hashing.typ"
+#pagebreak()
 #include "notes/string_algorithms.typ"
+#pagebreak()
 #include "notes/range_trees.typ"
+#pagebreak()
 #include "notes/parallel_algorithms.typ"

@@ -25,7 +25,7 @@
     - *Benefit*: When we reach the leaf, we are guaranteed that the parent has space. We never need to propagate splits upward.
     - *Locking*: We only need to hold locks on the current node and its parent. We can release ancestors earlier.
 
-#line(length: 100%, stroke: gray)
+== Lock-free Stack
 
 #small_question("Lock-free Stack")[
   Design and analyze lock-free implementation of a stack.
@@ -51,7 +51,7 @@
 - *Lock-free*: If a CAS fails, it means another thread succeeded. System-wide progress is guaranteed.
 - *Contention*: Under high load, many retries can occur (exponential backoff helps).
 
-#line(length: 100%, stroke: gray)
+== Atomic Primitives & ABA
 
 #small_question("Atomic Primitives & ABA")[
   Describe atomic primitives and their properties. Explain the ABA problem and its solution.

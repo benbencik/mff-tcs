@@ -112,7 +112,7 @@ If $"LCP"["rank"[i]] = h$, then $"LCP"["rank"[i+1]] >= h-1$.
     - Duplicates are counted by $"LCP"$ values.
     - Distinct = $n(n+1)/2 - "sum"("LCP")$.
 
-#line(length: 100%, stroke: gray)
+== Longest Common Substring
 
 #small_question("Longest Common Substring")[
   Show how to use suffix array and LCP array to find the longest common substring of two strings.

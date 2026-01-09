@@ -48,7 +48,7 @@ Goal: Compute $B = A^T$. Assume $N$ is large ($N^2 > M$).
    - *Analysis*: Similar to tiling, but the "tile size" is determined implicitly by recursion depth where the problem fits in cache.
    - *Total I/O*: $O(N^2/B)$.
 
-#line(length: 100%, stroke: gray)
+== k-way Mergesort (Cache-Aware)
 
 #small_question("k-way Mergesort (Cache-Aware)")[
   Analyze k-way Mergesort in cache-aware model. What is the optimal choice of k?
@@ -71,7 +71,7 @@ $ k + 1 <= M/B ==> k approx M/B $
 Choose $k = Theta(M/B)$. This minimizes the height of the merge tree.
 *Optimal Complexity*: $O(N/B log_(M/B) (N/B))$.
 
-#line(length: 100%, stroke: gray)
+== Sleator-Tarjan Theorem (LRU)
 
 #small_question("Sleator-Tarjan Theorem (LRU)")[
   State and prove Sleator-Tarjan theorem about competitiveness of LRU. Describe the contribution of this theorem for analysis of cache-oblivious algorithms.

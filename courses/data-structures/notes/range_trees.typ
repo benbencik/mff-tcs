@@ -33,7 +33,7 @@
 - Reduces factor by $log n$.
 - Query: $O(log^(d-1) n + k)$.
 
-#line(length: 100%, stroke: gray)
+== k-d Trees
 
 #small_question("k-d Trees")[
   Define k-d trees and show that 2-d interval queries take $Omega(sqrt(n))$.
@@ -56,7 +56,7 @@
     - Alternating levels: $Q(n) = 2 Q(n/4) + 2 ==> Q(n) = O(sqrt(n))$.
   - We can construct a set of points and a query line that intersects $sqrt(n)$ cells.
 
-#line(length: 100%, stroke: gray)
+== Dynamic Range Trees
 
 #small_question("Dynamic Range Trees")[
   Show how to dynamize two-dimensional interval trees (Range trees), Insert is sufficient.
