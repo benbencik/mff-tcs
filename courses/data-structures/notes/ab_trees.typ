@@ -115,6 +115,33 @@ While worst-case modification cost is $O(log n)$, the amortized cost of structur
   Since $Phi >= 0$ and starts at 0, the total real cost is bounded by the initial work plus the potential changes, resulting in $O(1)$ amortized structural changes
 ]
 
+#small_question("Amortized Node Changes: (a,2a) vs (a,2a-1)")[
+  State and prove the theorem about amortized number of node changes for Insert and Delete on $(a,2a)$-trees. How does this differ for $(a,2a-1)$-trees?
+]
+
+*$(a,2a)$-trees (Wide Slack, Clean Amortization)*:
+- The "safe" zone spans keys $a .. 2a-2$; risk states are $a-2, a-1$ (underflow side) and $2a-1, 2a$ (overflow side).
+- With the potential assignment in the table above (high potential on risk states), each split at $2a$ and each merge from $a-2$ releases a constant amount of potential that pays for the restructure.
+- Result: A sequence of $m$ updates performs $O(m)$ structural changes. Amortized node modifications per operation are $O(1)$.
+
+*$(a,2a-1)$-trees (Narrower Slack, Extra Local Fixes)*:
+- Splitting a full node of size $2a-1$ may produce children with about $(a-1)$ and $(a-1)$ keys, which is closer to the minimum and can trigger an immediate transfer/borrow at the next update.
+- Likewise, underflows occur at $a-2$ more often relative to the width of the safe zone, so local "borrow"/"merge" steps happen slightly more frequently.
+- Adjusted potential: Increase weights on the near-minimum state ($a-1$) and near-maximum state ($2a-1$) to ensure a split/merge causes a net drop that pays for its cost.
+- Result: The asymptotic bound remains the same: $O(1)$ amortized node modifications per operation. The difference is in constants and in the need to account for an extra local transfer after some splits.
+
+#theorem("Amortized Updates on $(a,2a-1)$-trees")[
+  There exists a potential function over node occupancies such that any sequence of $m$ Inserts/Deletes on an $(a,2a-1)$-tree performs $O(m)$ node modifications. Hence, the amortized number of node changes per operation is $O(1)$.
+]
+
+#proof[
+  Define $f(k)$ to assign higher potential to boundary occupancies $k in {a-2, a-1, 2a-2, 2a-1}$, with strictly larger weights on $a-1$ and $2a-1$ than in the $(a,2a)$ case. The conditions analogous to the three constraints (limited change, free splits, free merges) still hold:
+  1. *Limited Change*: $|f(k+1) - f(k)| <= c$ ensures single-key updates cost $O(1)$ amortized.
+  2. *Free Split at $2a-1$*: Post-split children sit near $a-1$; the potential drop across parent and children covers the split work and any immediate transfer if needed.
+  3. *Free Merge at $a-2$*: Combined potential of the underflowing node and its sibling pays for the merge and rebalancing at the parent.
+  Since total potential is non-negative and decreases sufficiently on rebalancing events, total real work across $m$ updates is $O(m)$, yielding $O(1)$ amortized node changes.
+]
+
 == BB[α]-Trees
 
 #small_question("BB[α]-Trees")[

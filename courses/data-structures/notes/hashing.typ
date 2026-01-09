@@ -2,6 +2,8 @@
 
 = Hashing
 
+== Hash Families & Chaining
+
 #big_question("Hash Families & Chaining")[
   Define c-universal and k-independent families of hash functions. Give examples where a c-universal family is not enough, but we must use a k-independent family. Formulate and prove the theorem about expected chain length in hashing with chaining. Show examples of c-universal and k-independent families for hashing natural numbers. For one example prove c-universality or k-independence, for k >= 2.
 ]
@@ -44,7 +46,7 @@ While c-universality suffices for chaining, stronger independence is needed else
 3. *Multiply-Shift*: $h_a(x) = (a dot x) >> (w - l)$. Fast on hardware. (2-universal).
 4. *Tabulation Hashing*: $x$ split into characters $x_1...x_c$. $h(x) = T_1[x_1] xor ... xor T_c[x_c]$. (3-independent).
 
-#line(length: 100%, stroke: gray)
+== Linear Probing
 
 #big_question("Linear Probing")[
   Describe and analyze linear probing with a fully random hash function and e.g. one-third fill factor. Describe advantages and disadvantages compared to other data structures, especially those based on hashing.
@@ -85,7 +87,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   Since $q < 1$, the term $q^(2^l)$ decays extremely fast (much faster than $2^l$ grows), so the sum converges to a constant.
 ]
 
-#line(length: 100%, stroke: gray)
+== Scalar Product Hashing
 
 #small_question("Scalar Product Hashing")[
   Describe a system of hash functions derived from scalar product. Prove that it is a 1-universal system from $ZZ_p^k$ to $ZZ_p$.
@@ -107,7 +109,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   For every choice of $t_1, ..., t_(d-1)$, there exists exactly one value of $t_d$ for which the last equality holds. Therefore it holds with probability $1/p$.
 ]
 
-#line(length: 100%, stroke: gray)
+== Linear Congruence Hashing
 
 #small_question("Linear Congruence Hashing")[
   Describe a system of hash functions based on linear congruence. Prove that it is a 2-independent system from $ZZ_p$ to $[m]$ (you can use the lemma about modulo, which you should formulate but do not need to prove).
@@ -138,7 +140,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   Let $H$ be a $(2, c)$-independent family of functions from $U$ to $[r]$ and $m < r$. Then the family $H mod m = {h mod m | h in H}$ is $2c$-universal and $(2, 4c)$-independent.
 ]
 
-#line(length: 100%, stroke: gray)
+== k-independent Hashing
 
 #small_question("k-independent Hashing")[
   Construct a k-independent system of hash functions from $ZZ_p$ to $[m]$. Justify k-independence (you can use the lemma about modulo, which you should formulate but do not need to prove).
@@ -160,7 +162,7 @@ For any field $ZZ_p$ and $k >= 1$, the family $P_k = {h_bold(t) | bold(t) in ZZ_
 
 *Corollary*: If $p >= 2 k m$, the family $P_k mod m$ is $(k, 2)$-independent.
 
-#line(length: 100%, stroke: gray)
+== Rolling Hash (Strings)
 
 #small_question("Rolling Hash (Strings)")[
   Construct a 2-independent system hashing strings of length at most L over alphabet [a] to [m] based on polynomials, i.e. "rolling hash". Describe the advantage of using this system compared to other hash functions.
@@ -204,7 +206,7 @@ where $a, A, B$ are chosen uniformly from $ZZ_p$ (with $A != 0$).
    The final bucket index is then computed as $((A dot H_"new" + B) mod p) mod m$.
 2. *Space Efficiency*: Requires storing only $O(1)$ random parameters ($a, A, B$), unlike scalar product hashing which requires a random vector of size $d$.
 
-#line(length: 100%, stroke: gray)
+== Bloom Filters
 
 #small_question("Bloom Filters")[
   Describe and analyze Bloom filter. Give an example of its practical use.
