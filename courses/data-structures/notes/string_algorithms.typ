@@ -23,65 +23,6 @@ Goal: Construct SA in $O(n log n)$.
 We iteratively sort suffixes by their prefixes of length $2^k$. In the first step, we sort by the first character. In step $k$, assuming we have computed ranks for prefixes of length $k$ (where $k$ is a power of 2), we can determine the order for length $2k$ by comparing pairs of ranks $(R[i], R[i+k])$. The first component determines the order of the first half (length $k$), and the second component determines the order of the second half. We repeat this doubling until the prefix length covers the whole string.
 
 
-
-#algorithm({
-  Comment[*input:* string $S$ of length $n$]
-  Comment[*output:* suffix array $X$]
-  
-  LineComment(
-    Assign[$D$][${ (S[i], i) | i = 0, dots, n }$],
-    [Create pairs of (character, index)]
-  )
-  LineComment(
-    Line[sort $D$ lexicographically],
-    [Initial sort by first character]
-  )
-  
-  For([$j = 0$ to $n$], {
-    Assign[$X[j]$][$D[j]."index"$]
-    IfElseChain([$j = 0$ or $D[j]."char" != D[j-1]."char"$], {
-      LineComment(
-        Assign[$R[X[j]]$][$j$],
-        [New rank for different character]
-      )
-    }, {
-      LineComment(
-        Assign[$R[X[j]]$][$R[X[j-1]]$],
-        [Same rank as previous]
-      )
-    })
-  })
-  
-  LineComment(
-    Assign[$k$][$1$],
-    [Start with length 1]
-  )
-  
-  While([$k <= n$], {
-    LineComment(
-      Assign[$D$][${ (R[i], R[i+k], i) | i = 0, dots, n }$],
-      [Create tuples with ranks at distance $k$]
-    )
-    Line[sort $D$ lexicographically]
-    
-    For([$j = 0$ to $n$], {
-      Assign[$X[j]$][$D[j]."idx"$]
-      IfElseChain([$j = 0$ or $(D[j].r_1, D[j].r_2) != (D[j-1].r_1, D[j-1].r_2)$], {
-        Assign[$R[X[j]]$][$j$]
-      }, {
-        Assign[$R[X[j]]$][$R[X[j-1]]$]
-      })
-    })
-    
-    LineComment(
-      Assign[$k$][$2k$],
-      [Double the comparison length]
-    )
-  })
-  
-  Return[$X$]
-})
-
 === Construction: LCP Array (Kasai's Algorithm)
 Goal: Construct LCP in $O(n)$ given SA and S.
 

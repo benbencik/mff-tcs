@@ -6,6 +6,7 @@
     Q5:Popište a analyzujte hešování s lineárním přidáváním s plně náhodnou hešovací funkcí a např. třetinovým zaplněním. Popište výhody a nevýhody oproti jiným datovým strukturám, zejména založeným na hešování.
     Q6:Definujte vícerozměrné intervalové stromy (range trees). Rozeberte prostorovou složitost datové struktury a časovou složitost konstrukce a obdélníkových dotazů (bonus: včetně zrychlení kaskádováním).
     Q7:Definujte suffixové pole a LCP pole. Popište a analyzujte algoritmy na jejich konstrukci (pro sufixové pole stačí ve skoro lineárním čase). Popište příklad úlohy, kterou umí tato pole efektivně řešit.
+    Q8:Popište zámky a atomické operace CAS a LL/SC. Navrhněte a analyzujte bezzámkovou implementaci zásobníku. Vysvětlete problém ABA a navrhněte jeho řešení. Porovnejte paralelizaci datových struktur za použití zámků a za použití atomikých operací (tzv. bezzámkové datové struktury), přičemž v obou případech vysvětlete, jaké mohou nastat problémy.
 
 „Malé“ otázky
     q1:Popište dynamické pole, tedy „nafukovací pole" se zvětšováním a zmenšováním. Analyzujte jeho amortizovanou složitost.
@@ -22,6 +23,5 @@
     q12:Definujte k-d stromy a ukažte, že 2-d intervalové dotazy trvají Ω(√n).
     q13:Ukažte, jak dynamizovat dvou dimenzionální intervalové stromy (tedy Range trees), stačí Insert.
     q14:Ukažte, jak použít suffixové pole a LCP pole na nalezení nejdelšího společného podřetězce dvou řetězců.
-    q15:Ukažte, jak paralelizovat (a,b)-strom.
+    q15:Ukažte, jak paralelizovat (a,b)-strom pomocí zámků.
     q16:Navrhněte a analyzujte bezzámkovou implementaci zásobníku.
-    q17:Popište atomická primitiva a jejich vlastnosti. Vysvětlete problém ABA a jeho řešení.

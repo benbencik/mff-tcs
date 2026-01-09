@@ -62,13 +62,13 @@
 
 #let definition(title, body) = {
   block(
-    // fill: rgb("#f0f4f8"),
-    stroke: gray,
+    fill: rgb("#f0f4f8"),
+    // stroke: gray,
     inset: 1.2em,
     radius: 6pt,
     width: 100%,
     [
-      #set text(weight: "bold", fill: luma(80))
+      #set text(weight: "bold", fill: black)
       *Definition: #title*
       #set text(weight: "regular", fill: black)
       #v(0.3em)
@@ -164,6 +164,23 @@
   )
   v(0.8em)
 }
+
+#let observation(body) = {
+  block(
+    fill: rgb("#f0fdf4"),
+    stroke: rgb("#16a34a"),
+    inset: 1.2em,
+    radius: 6pt,
+    width: 100%,
+    [
+      #set text(weight: "regular", fill: black)
+      #v(0.3em)
+      #body
+    ]
+  )
+  v(0.8em)
+}
+
 
 // ============================================================
 // ALGORITHM BLOCK
