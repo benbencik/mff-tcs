@@ -83,7 +83,7 @@
 While worst-case modification cost is $O(log n)$, the amortized cost of structural changes is lower if we provide "breathing space" between rebalancing thresholds.
 
 #theorem("Amortized Update Cost")[
-  For an $(a,b)$-tree where $b >= 2a$ (specifically analyzing $(a, 2a)$), a sequence of $m$ Insert and Delete operations on an initially empty tree performs $O(m)$ node modifications. Thus, the amortized number of modifi/ations per operation is $O(1)$
+  For an $(a,b)$-tree where $b >= 2a$ (specifically analyzing $(a, 2a)$), a sequence of $m$ Insert and Delete operations on an initially empty tree performs $O(m)$ node modifications.
 ]
 
 #proof[
@@ -115,30 +115,23 @@ While worst-case modification cost is $O(log n)$, the amortized cost of structur
   Since $Phi >= 0$ and starts at 0, the total real cost is bounded by the initial work plus the potential changes, resulting in $O(1)$ amortized structural changes
 ]
 
-*$(a,2a)$-trees (Wide Slack, Clean Amortization)*:
+*$(a,2a)$-trees*:
 - The "safe" zone spans keys $a .. 2a-2$; risk states are $a-2, a-1$ (underflow side) and $2a-1, 2a$ (overflow side).
 - With the potential assignment in the table above (high potential on risk states), each split at $2a$ and each merge from $a-2$ releases a constant amount of potential that pays for the restructure.
 - Result: A sequence of $m$ updates performs $O(m)$ structural changes. Amortized node modifications per operation are $O(1)$.
 
-*$(a,2a-1)$-trees (Minimal Slack, Thrashing Risk)*:
+*$(a,2a-1)$-trees*:
 - In the minimal case ($b = 2a-1$), the thresholds for splitting and merging are adjacent. Splitting a node with $2a-1$ keys produces two nodes with $a-1$ keys. 
 - If we immediately delete a key from one of these new nodes, it drops to $a-2$, triggering a merge.
 - This leads to *thrashing* (or oscillation): a sequence of alternating Insert/Delete operations can cause repeated expensive split/merge operations up to the root.
 - Consequently, the amortized cost per operation is $Omega(log n)$, not $O(1)$.
 - To fix this, we can allow $b >= 2a$, creating a "breathing space" between split and merge thresholds.
 
-#theorem("Amortized Updates on $(a,2a-1)$-trees (Correction)")[
-  Contrary to the stable $(a, 2a)$ case, amortized constant time is *not* guaranteed for mixed Insert/Delete sequences on $(a, 2a-1)$-trees due to the oscillation problem described above.
-]
-
 #small_question("Depth of (a,b)-trees")[
   Analyze the depth of (a,b)-trees.
 ]
 
-#lemma("Depth of (a,b)-tree")[
-  The height $h$ of an (a,b)-tree with $n$ keys satisfies:
-  $ log_b (n + 1) <= h <= 1 + log_a ((n + 1) / 2) $ 
-]
+The height $h$ of an (a,b)-tree with $n$ keys satisfies: $ log_b (n + 1) <= h <= 1 + log_a ((n + 1) / 2) $ 
 
 #proof[
   We bound the number of keys $n$ for a fixed height $h$.
