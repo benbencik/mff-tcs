@@ -2,11 +2,11 @@
 
 = Hashing
 
-== Hash Families & Chaining
-
 #big_question("Hash Families & Chaining")[
-  Define c-universal and k-independent families of hash functions. Give examples where a c-universal family is not enough, but we must use a k-independent family. Formulate and prove the theorem about expected chain length in hashing with chaining. Show examples of c-universal and k-independent families for hashing natural numbers. For one example prove c-universality or k-independence, for k >= 2.
+  Define c-universal and k-independent families of hash functions. Give examples where a c-universal family is not enough, but a k-independent family must be used. Formulate and prove the theorem about the expected chain length in hashing with chaining. Show examples of c-universal and k-independent families for hashing natural numbers. For one example, prove c-universality or k-independence, for k >= 2.
 ]
+
+=== Hash Families
 
 #definition("Hash Families")[
   Let $H$ be a family of functions from $U$ to $[m]$.
@@ -15,6 +15,8 @@
   2. *(k, c)-Independent*: The family is $(k, c)$-independent for integer $k$ ($1 <= k <= |U|$) and real $c > 0$ iff for every $k$-tuple $x_1, ..., x_k$ of distinct elements of $U$ and every $k$-tuple $a_1, ..., a_k$ of buckets in $[m]$, we have
      $ P_(h in H)[h(x_1) = a_1 and ... and h(x_k) = a_k] <= c/m^k $
 ]
+
+=== Expected Chain Length
 
 #theorem("Expected Collisions (Chain Length)")[
   Let $H$ be a $c$-universal family of functions from $U$ to $[m]$, $X = {x_1, ..., x_n} subset U$ a set of items stored in the data structure, and $y in U \ X$ another item not stored in the data structure. Then we have
@@ -46,11 +48,12 @@ While c-universality suffices for chaining, stronger independence is needed else
 3. *Multiply-Shift*: $h_a(x) = (a dot x) >> (w - l)$. Fast on hardware. (2-universal).
 4. *Tabulation Hashing*: $x$ split into characters $x_1...x_c$. $h(x) = T_1[x_1] xor ... xor T_c[x_c]$. (3-independent).
 
-== Linear Probing
 
 #big_question("Linear Probing")[
-  Describe and analyze linear probing with a fully random hash function and e.g. one-third fill factor. Describe advantages and disadvantages compared to other data structures, especially those based on hashing.
+  Describe and analyze hashing with linear probing using a fully random hash function and, e.g., one-third fill factor. Describe the advantages and disadvantages compared to other data structures, especially those based on hashing.
 ]
+
+=== Linear Probing
 
 *Mechanism*:
 We fix a hash function $h$ from $U$ to $[m]$. The probe sequence for $x$ will be $h(x), h(x)+1, h(x)+2, ...$, taken modulo $m$.
@@ -87,11 +90,12 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   Since $q < 1$, the term $q^(2^l)$ decays extremely fast (much faster than $2^l$ grows), so the sum converges to a constant.
 ]
 
-== Scalar Product Hashing
 
 #small_question("Scalar Product Hashing")[
   Describe a system of hash functions derived from scalar product. Prove that it is a 1-universal system from $ZZ_p^k$ to $ZZ_p$.
 ]
+
+=== Scalar Product Hashing
 
 #definition("Scalar Product Family")[
   For a prime $p$ and vector size $d >= 1$, we define the family of scalar product hash functions $S = {h_bold(t) | bold(t) in ZZ_p^d}$ from $ZZ_p^d$ to $ZZ_p$, where $h_bold(t)(bold(x)) = bold(t) dot bold(x)$.
@@ -109,11 +113,12 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   For every choice of $t_1, ..., t_(d-1)$, there exists exactly one value of $t_d$ for which the last equality holds. Therefore it holds with probability $1/p$.
 ]
 
-== Linear Congruence Hashing
 
 #small_question("Linear Congruence Hashing")[
   Describe a system of hash functions based on linear congruence. Prove that it is a 2-independent system from $ZZ_p$ to $[m]$ (you can use the lemma about modulo, which you should formulate but do not need to prove).
 ]
+
+=== Linear Congruence Hashing
 
 #definition("Linear Congruence Family")[
   For any prime $p$ and $m <= p$, we define the family of linear functions $L = {h_(a,b) | a, b in [p]}$ from $[p]$ to $[m]$, where $h_(a,b)(x) = ((a x + b) mod p) mod m$.
@@ -140,11 +145,12 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   Let $H$ be a $(2, c)$-independent family of functions from $U$ to $[r]$ and $m < r$. Then the family $H mod m = {h mod m | h in H}$ is $2c$-universal and $(2, 4c)$-independent.
 ]
 
-== k-independent Hashing
 
 #small_question("k-independent Hashing")[
   Construct a k-independent system of hash functions from $ZZ_p$ to $[m]$. Justify k-independence (you can use the lemma about modulo, which you should formulate but do not need to prove).
 ]
+
+=== k-independent Hashing
 
 #theorem("Lemma K (k-independent composition modulo m)")[
   Let $H$ be a $(k, c)$-independent family of functions from $U$ to $[r]$ and $m$ integer such that $r >= 2 k m$. Then the family $H mod m = {h mod m | h in H}$ is $(k, 2c)$-independent.
@@ -162,11 +168,12 @@ For any field $ZZ_p$ and $k >= 1$, the family $P_k = {h_bold(t) | bold(t) in ZZ_
 
 *Corollary*: If $p >= 2 k m$, the family $P_k mod m$ is $(k, 2)$-independent.
 
-== Rolling Hash (Strings)
 
 #small_question("Rolling Hash (Strings)")[
-  Construct a 2-independent system hashing strings of length at most L over alphabet [a] to [m] based on polynomials, i.e. "rolling hash". Describe the advantage of using this system compared to other hash functions.
+  Construct a 2-independent system hashing strings of length at most L over alphabet [a] to [m] based on polynomials, i.e., "rolling hash". Describe the advantage of using this system compared to other hash functions.
 ]
+
+=== Rolling Hash
 
 #definition("Polynomial Rolling Hash")[
   For a prime $p$ and vector size $d$, define the family $R = {h_a | a in ZZ_p}$ from $ZZ_p^d$ to $ZZ_p$, where $h_a(bold(x)) = sum_{i=0}^{d-1} x_(i+1) dot a^(d-1-i)$.
@@ -206,11 +213,12 @@ where $a, A, B$ are chosen uniformly from $ZZ_p$ (with $A != 0$).
    The final bucket index is then computed as $((A dot H_"new" + B) mod p) mod m$.
 2. *Space Efficiency*: Requires storing only $O(1)$ random parameters ($a, A, B$), unlike scalar product hashing which requires a random vector of size $d$.
 
-== Bloom Filters
 
 #small_question("Bloom Filters")[
-  Describe and analyze Bloom filter. Give an example of its practical use.
+  Describe and analyze a Bloom filter. Give an example of its practical use.
 ]
+
+=== Bloom Filters
 
 *Description*:
 A probabilistic data structure used to test whether an element is a member of a set. It is space-efficient but allows for *false positives* (it may say an element is in the set when it is not). It never produces *false negatives*.
@@ -218,10 +226,21 @@ A probabilistic data structure used to test whether an element is a member of a 
 *Structure & Operations*:
 - *Memory*: An array $B$ of $m$ bits, initially all set to 0.
 - *Hash Functions*: $k$ independent hash functions $h_1, ..., h_k$ mapping items to $[m]$.
-- *Insert(x)*: Compute $h_1(x), ..., h_k(x)$ and set bits $B[h_i(x)]$ to 1.
-- *Query(x)*: Check bits $B[h_1(x)], ..., B[h_k(x)]$.
-  - If *any* bit is 0, return *NO* (x is definitely not in the set).
-  - If *all* bits are 1, return *YES* (x is likely in the set).
+
+*Insert(x)*:
+```
+1. For i = 1 to k:
+2.   idx = h_i(x)
+3.   B[idx] = 1
+```
+
+*Query(x)*:
+```
+1. For i = 1 to k:
+2.   If B[h_i(x)] == 0:
+3.     Return NO
+4. Return YES
+```
 
 *Variants*:
 - *Single-table Filter*: All $k$ hash functions map to the same bit array of size $m$.

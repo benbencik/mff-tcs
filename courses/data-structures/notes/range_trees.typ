@@ -61,14 +61,13 @@ How the query works:
 ]
 
 *2D Range Query Lower Bound*:
-- *Theorem*: Worst-case range query time in 2D k-d tree is $Omega(sqrt(n))$.
-- *Proof Sketch*:
-  - Consider a query line (thin rectangle).
-  - The recurrence for number of visited nodes $Q(n)$:
-    - Splitting line parallel to query line: Visit both children ($2 Q(n/4)$).
-    - Splitting line perpendicular: Visit one child ($Q(n/2)$).
-    - Alternating levels: $Q(n) = 2 Q(n/4) + 2 ==> Q(n) = O(sqrt(n))$.
-  - We can construct a set of points and a query line that intersects $sqrt(n)$ cells.
+#theorem("Worst case query foe 2d tree")[
+  Worst-case range query time in 2D k-d tree is $Omega(sqrt(n))$.
+]
+
+#proof[
+  Consider a tree built for the set of points ${(i, i) | 1 <= i <= n}$ for $n = 2^t - 1$. It is a complete binary tree with $t$ levels. Let us observe what happens when we query a range ${0} times RR$. On levels where the $x$ coordinate is compared, we always go to the left. On levels comparing $y$, both subtrees lie in the query range, so we recurse on both of them. This means that the number of visited nodes doubles at every other level, so at level $t$ we visit $2^(t/2) approx sqrt(n)$ nodes.
+]
 
 
 #small_question("Dynamic Range Trees")[

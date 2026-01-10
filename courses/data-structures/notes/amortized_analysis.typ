@@ -2,8 +2,8 @@
 
 = Amortized Analysis
 
-#small_question("Amortized Analysis")[
-  Explain amortized analysis and the potential method. Apply it to analyze the amortized complexity of dynamic arrays with growing and shrinking.
+#small_question("Dynamic Array")[
+  Describe a dynamic array, i.e., an "inflatable array" with growing and shrinking. Analyze its amortized complexity.
 ]
 
 === Introduction
