@@ -133,23 +133,12 @@ A $K$-way merge needs to locate a minimum of $K$ items in every step, which can 
 
 *I/O Analysis*:
 If we have a large enough cache during the merge, every input array has its own scan and the heap fits in cache.
--   The total I/O complexity of a merge is $O(T/B + K)$. The extra $K$ is significant only if runs are small and each is located in a different block (which typically doesn't happen in Mergesort as runs are consecutive).
--   Therefore, $O(T/B + 1)$ transfers are enough.
--   All merges during a pass perform $O(N/B + 1)$ transfers.
--   Multiplying this by the number of passes yields $O(N/B dot log N / log K + 1)$.
+-   The total I/O complexity of a merge of $T$ items is $O(T/B)$.
+-   All merges during a pass perform $O(N/B)$ transfers.
+-   Multiplying this by the number of passes yields $O(N/B dot (log N) / (log K))$.
 
 *Constraint (Choice of $K$)*:
 How large $K$ does our cache allow?
--   Each scan requires its own cached block, which is $K+1$ blocks total.
--   Another $K-1$ blocks are more than enough for the heap.
--   So $M >= 2 B K$ is sufficient.
-
-*Optimal Choice*:
-If we know $M$ and $B$, we can set:
-$ K = floor(M / (2B)) $
-This minimizes the height of the merge tree while fitting in the cache.
-
-*Optimal Complexity*:
-Substituting this $K$ into the I/O complexity formula:
-$ O(N/B dot log N / log (M/B) + 1) $
-This is known to be optimal.
+-   Each scan requires its own cached block, which is $K$ blocks total.
+-   Another $K$ blocks are needed for the heap.
+-   So $M >= 2 B K$ is sufficient and we can set $K = floor(M / (2B))$

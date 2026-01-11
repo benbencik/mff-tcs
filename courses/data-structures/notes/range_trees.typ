@@ -76,23 +76,31 @@ How the query works:
 
 === Dynamic Range Trees
 
-*Problem*: Insertions/Deletions in 2D Range Tree.
-*Problem*: Range trees are static. Insertions require rebalancing, which is expensive ($O(n)$ worst case) because of associated structures.
+*The Challenge of Dynamization*
+Making range trees dynamic is non-trivial. Standard balanced binary search trees (like AVL or Red-Black trees) rely on *rotations* to maintain balance. In a multi-dimensional range tree, this strategy fails.
+Recall that every node in the primary tree (x-tree) stores a secondary data structure (y-tree) containing _all_ points in its subtree. If we perform a rotation in the x-tree, the parent-child relationships change, and thus the set of points in the subtrees of the affected nodes changes drastically. We would have to rebuild the associated y-trees for these nodes from scratch. In the worst case, this takes $Theta(n)$ time per update, which is too slow.
 
-*Solution 1: Amortized Rebuilding (Weight-Balanced Trees)*
-- Use a *BB[$alpha$]* tree (Bounded Balance) for the primary structure.
-- *Property*: If a node $v$ becomes unbalanced, it means $Omega("size"(v))$ updates have occurred in its subtree since it was last perfectly balanced.
-- *Algorithm*:
-  - Insert/Delete as usual.
-  - If a node violates balance condition, rebuild the entire subtree rooted at $v$ and all associated structures.
-- *Cost*: Rebuilding a node of size $m$ takes $O(m log^(d-1) m)$.
-- *Amortized Analysis*: Each update contributes to rebuilding costs at each ancestor level.
-- *Total*: $O(log^d n)$ amortized update time.
+*Solution: Weight-Balanced Trees*
+To achieve poly-logarithmic update time, we need a balancing strategy that avoids frequent expensive structural changes. We use *weight-balanced trees* (also known as BB[$alpha$] trees).
+The key idea is lazy rebalancing: we allow the tree to become somewhat unbalanced. We only intervene when a node $v$ becomes "too unbalanced" (e.g., one child becomes significantly heavier than the other). When this condition is violated, we completely *rebuild* the entire subtree rooted at $v$ into a perfectly balanced state.
 
-*Solution 2: Logarithmic Method (Decomposable Structures)*
-- Maintain a set of static range trees of sizes $2^0, 2^1, 2^2, ...$ based on the binary representation of $n$.
-- *Insert*: Create a tree of size 1. If a tree of size 1 exists, merge them to size 2. If size 2 exists, merge to 4, etc. (Like binary addition).
-- *Query*: Query all $O(log n)$ trees and combine results.
-- *Complexity*:
-  - Query: $O(log n dot log^d n) = O(log^(d+1) n)$.
-  - Insert: Amortized $O(log n dot ("build cost"/n)) = O(log^d n)$.
+*Detailed Insert Operation Analysis*
+Suppose we want to insert a new point $p = (p_x, p_y)$.
+1.  *Update y-trees*: We traverse the path from the root of the x-tree to the leaf for $p_x$. For every node $v$ on this path, $p$ belongs to the subtree of $v$, so we must insert $p_y$ into the associated y-tree of $v$.
+    - There are $O(log n)$ such nodes.
+    - Each insertion into a y-tree (which is also a weight-balanced tree) takes amortized $O(log n)$ time.
+    - Total time for updating y-trees: $O(log^2 n)$.
+
+2.  *Update x-tree*: We insert $p_x$ into the x-tree.
+    - If the x-tree becomes unbalanced at some node $v$, we must rebuild the entire subtree rooted at $v$.
+    - Rebuilding a subtree of size $m$ in the x-tree is expensive because we must also rebuild the y-trees for every node in that subtree. This takes $O(m log m)$ time (sorting points by y takes linear time if we merge lists from children, or $O(m log m)$ if we resort).
+    - However, in a weight-balanced tree, a node of size $m$ is rebuilt only after $Omega(m)$ updates have passed through it.
+    - Therefore, the amortized cost of rebuilding the x-tree per insertion is $O(log^2 n)$ (derived from charging $O(log n)$ cost at each of the $O(log n)$ levels).
+
+*Result*: The total amortized time complexity for *Insert* (and similarly *Delete*) is $O(log^2 n)$ for 2D trees. By induction, it is $O(log^d n)$ for $d$-dimensional trees.
+
+*Summary of Complexities ($d$-dim)*:
+- *Space*: $O(n log^(d-1) n)$
+- *Build Time*: $O(n log^(d-1) n)$
+- *Query Time*: $O(log^d n + k)$ (can be improved to $O(log^(d-1) n + k)$ with fractional cascading)
+- *Update Time*: $O(log^d n)$ amortized
