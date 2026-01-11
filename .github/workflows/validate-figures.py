@@ -70,7 +70,7 @@ def validate_figure_exists(base_path: Path, image_path: str, typst_file: Path) -
     if 'notes' in typst_file.parts and image_path.startswith('figs/'):
         # Find the course directory (parent of notes)
         for i, part in enumerate(typst_file.parts):
-            if part == 'notes':
+            if part == 'notes' and i > 0:
                 # Get the course directory path
                 course_dir = Path(*typst_file.parts[:i])
                 full_path = (course_dir / image_path).resolve()
@@ -120,7 +120,11 @@ def main():
             # Make paths relative to repository root for cleaner output
             rel_file = missing['file'].relative_to(root_dir)
             expected_path = (missing['base_dir'] / missing['image']).resolve()
-            rel_expected = expected_path.relative_to(root_dir) if expected_path.is_relative_to(root_dir) else expected_path
+            try:
+                rel_expected = expected_path.relative_to(root_dir)
+            except ValueError:
+                # Path is not relative to root_dir, use absolute path
+                rel_expected = expected_path
             
             print(f"  File: {rel_file}")
             print(f"  Line: {missing['line']}")
