@@ -10,11 +10,12 @@
 === Hash Families
 
 #definition("Hash Families")[
-    Let $cal(H)$ be a family of functions from $U$ to $[m]$.
-    1. *c-Universal*: The family is $c$-universal for some $c > 0$ if for every pair $x, y$ of distinct elements of $U$ we have
-       $ P_(h in cal(H))[h(x) = h(y)] <= c/m $
-    2. *(k, c)-Independent*: The family is $(k, c)$-independent for integer $k$ ($1 <= k <= |U|$) and real $c > 0$ iff for every $k$-tuple $x_1, ..., x_k$ of distinct elements of $U$ and every $k$-tuple $a_1, ..., a_k$ of buckets in $[m]$, we have
-       $ P_(h in cal(H))[h(x_1) = a_1 and ... and h(x_k) = a_k] <= c/m^k $]
+  Let $cal(H)$ be a family of functions from $U$ to $[m]$.
+  1. *c-Universal*: The family is $c$-universal for some $c > 0$ if for every pair $x, y$ of distinct elements of $U$ we have
+    $ P_(h in cal(H))[h(x) = h(y)] <= c/m $
+  2. *(k, c)-Independent*: The family is $(k, c)$-independent for integer $k$ ($1 <= k <= |U|$) and real $c > 0$ iff for every $k$-tuple $x_1, ..., x_k$ of distinct elements of $U$ and every $k$-tuple $a_1, ..., a_k$ of buckets in $[m]$, we have
+    $ P_(h in cal(H))[h(x_1) = a_1 and ... and h(x_k) = a_k] <= c/m^k $
+]
 
 === Expected Chain Length
 
@@ -34,7 +35,7 @@
 
   Let $h$ be a function picked uniformly at random from $cal(H)$. We introduce indicator random variables
 
-  $ A_i = cases(1 "if" h(x_i) = h(y)\, , 0 "otherwise".) $
+  $ A_i = cases(1 "if" h(x_i) = h(y)\,, 0 "otherwise".) $
 
   Expectation of zero-one random variables is easy to calculate: $E[A_i] = P[A_i = 1] = P[h(x_i) = h(y)]$. Because $cal(H)$ is universal, this probability is at most $c/m$.
   The theorem asks for the expectation of a random variable $A$, which counts $i$ such that $h(x_i) = h(y)$. This variable is a sum of the indicators $A_i$. By linearity of expectation, we have
@@ -152,8 +153,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   Construct a k-independent system of hash functions from $ZZ_p$ to $[m]$. Justify k-independence (you can use the lemma about modulo, which you should formulate but do not need to prove).
 ]
 
-*Polynomial Hashing*: For any field $ZZ_p$ and $k >= 1$, the family $cal(P)_k = {h_bold(t) | bold(t) in ZZ_p^k}$ where $h_bold(t)(x) = sum_{i=0}^{k-1} t_i x^i$ is $(k, 1)
-$-independent.
+*Polynomial Hashing*: For any field $ZZ_p$ and $k >= 1$, the family $cal(P)_k = {h_bold(t) | bold(t) in ZZ_p^k}$ where $h_bold(t)(x) = sum_{i=0}^{k-1} t_i x^i$ is $(k, 1)$-independent.
 
 #lemma("k-independent composition modulo m")[
   Let $cal(H)$ be a $(k, c)$-independent family of functions from $U$ to $[r]$ and $m$ integer such that $r >= 2 k m$. Then the family $cal(H) mod m = {h mod m | h in cal(H)}$ is $(k, 2c)$-independent.
@@ -254,8 +254,8 @@ It can be shown that for a fixed memory size $m$, the false positive probability
 1. *Optimal Error Rate*: When parameters are optimal (table 50% full), the probability a bit is 1 is $1/2$. Thus, the false positive rate is simply $(1/2)^k = 2^(-k)$.
 2. *Required Hash Functions*: To achieve a specific error rate $epsilon$, we must push $2^(-k)$ under $epsilon$. Thus we set $k = ceil(log_2(1/epsilon))$.
 3. *Required Memory*: Since the optimal state implies $e^(-k n/m) = 1/2$, we have $k n / m = ln 2$.
-   Solving for $m$, we get the minimum memory requirement:
-   $ m = (k n) / (ln 2) $
+  Solving for $m$, we get the minimum memory requirement:
+  $ m = (k n) / (ln 2) $
 
 *Counting Filters (Supporting Deletion)*:
 Standard Bloom filters do not support deletion. If we simply unset the bits for an element $x$, we might unset a bit shared with another element $y$, creating a false negative for $y$. To solve this, we use *Counting Bloom Filters*:
