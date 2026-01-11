@@ -44,11 +44,12 @@
 // FIGURE HELPER
 // ============================================================
 
-#let fig(filename, width: 80%, caption: none) = {
-  let img = image("figs/" + filename)
+#let fig(filename, width: 75%, caption: none) = {
+  let img = image("figs/" + filename, width: width)
   if caption != none {
     figure(
       img,
+      width: width,
       caption: caption
     )
   } else {
@@ -67,6 +68,7 @@
     inset: 1.2em,
     radius: 6pt,
     width: 100%,
+    breakable: false,
     [
       #set text(weight: "bold", fill: black)
       *Definition: #title*
@@ -88,6 +90,7 @@
     inset: 1.2em,
     // radius: 6pt,
     width: 100%,
+    breakable: false,
     [
       // #set text(weight: "bold", fill: rgb("#b45309"))
       *Theorem: #title*
@@ -127,8 +130,8 @@
 
 #let proof(body) = {
   block(
-    // stroke: (left: 2pt + gray),
-    // inset: 1.2em,
+    stroke: (left: 2pt + gray),
+    inset: 1.2em,
     width: 100%,
     [
       #set text(style: "italic", fill: rgb("#5a524c"))
@@ -179,58 +182,6 @@
     ]
   )
   v(0.8em)
-}
-
-
-// ============================================================
-// ALGORITHM BLOCK
-// ============================================================
-
-#let algorithm-block(name, pseudocode) = {
-  block(
-    fill: rgb("#f9fafb"),
-    stroke: rgb("#374151"),
-    inset: 1.2em,
-    radius: 6pt,
-    width: 100%,
-    [
-      #set text(weight: "bold", fill: rgb("#111827"))
-      Algorithm: #name
-      #set text(weight: "regular", fill: black)
-      #v(0.3em)
-      #pseudocode
-    ]
-  )
-  v(0.8em)
-}
-
-// ============================================================
-// COMPLEXITY NOTATION
-// ============================================================
-
-#let complexity(time: none, space: none) = {
-  let content = ""
-  if time != none {
-    content += "*Time:* $O(" + str(time) + ")$"
-  }
-  if space != none {
-    if time != none {
-      content += " / "
-    }
-    content += "*Space:* $O(" + str(space) + ")$"
-  }
-  
-  block(
-    fill: rgb("#ecfdf5"),
-    stroke: rgb("#059669"),
-    inset: 0.8em,
-    radius: 4pt,
-    [
-      #set text(size: 10pt, fill: rgb("#065f46"))
-      #content
-    ]
-  )
-  v(0.5em)
 }
 
 // ============================================================
