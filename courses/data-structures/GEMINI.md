@@ -1,10 +1,6 @@
 # Project: Data structures Study Materials
 
-This project aims to create study materials for the "Data structure" course taught at the Faculty of Mathematics and Physics, Charles University in Prague (MFF CUNI).
-
-## Goal
-
-The primary goal is to produce high-quality lecture notes in English (B2 level) for each topic covered in the course.
+The primary goal is to produce high-quality lecture notes in English for each topic covered in the course.
 
 ## Project Structure
 
@@ -24,21 +20,22 @@ If you want to use images, just add links to the images, do not try to download 
 ## Scope of Work
 
 0.  **Context:** Always read `./lib.typ` before doing other tasks. Before starting to any kind of work/changes on a lecture, first read a corresponding lecture PDF file in context and stick to it as much as possible.
-1.  **Process each presentation:** Go through the PDF presentations in the `sources/` directory one by one.
+1.  **Process each presentation:** Go through the PDFs in the `sources/` directory.
 2.  **Extract key concepts:** Identify and summarize the core algorithms, data structures, and theoretical concepts from each presentation.
-3.  **Translate and simplify:** Rewrite the extracted information in clear and concise B2 level English.
+3.  **Translate and simplify:** Rewrite the extracted information in clear and concise English. Extract the main ideas.
 4.  **Structure the content:** Organize the material in a logical way, suitable for study.
 5.  **Format in Typst:** Create a `.typ` file for each topic, formatting the content using Typst's syntax. Always ensure that the syntax is correct, feel free to consult official documentation.
 
 ## Text format
 
 1. Extract examples and explanations to a corresponding boxes so they do not disturb the main text information flow.
-2. Use bullet-point lists where possible, try to not use long sentences.
-3. Exclude all the history related notes.
-4. Each chapter should start on a new page.
-5. When a greek letter or match symbols should be used, use them as a proper symbols. Use either Typst `#sym.alpha` syntax or math mode `$ alpha $`. Note that Typst syntax is different from LaTeX symbol syntax! Never use `$sym` inside math mode!
+2. Exclude all the history related notes.
+3. Each chapter should start on a new page.
+4. When a greek letter or match symbols should be used, use them as a proper symbols. Use either Typst `#sym.alpha` syntax or math mode `$ alpha $`. Note that Typst syntax is different from LaTeX symbol syntax! Never use `$sym` inside math mode!
+5. The math font styling is `cal(), frak(), bb(), scr()` similar to latex but without backslash. 
 6. Use math mode when needed (denoted by $$).
 7. To bold text, use a single start `*bold text*`. To create italics text, use a single underscore `_italic text_`.
+8. After writing the document please use `typstyle -i <document>.typ`
 
 ## How Typst works
 
