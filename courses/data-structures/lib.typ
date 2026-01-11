@@ -4,7 +4,6 @@
 
 #import "@preview/algorithmic:1.0.7": *
 #import "@preview/cetz:0.3.1"
-#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 
 // ============================================================
 // DOCUMENT CONFIGURATION
@@ -22,17 +21,17 @@
     footer: [
       #set text(size: 9pt, fill: gray)
       #align(right, [#counter(page).display()])
-    ]
+    ],
   )
-  
+
   set text(
     font: "New Computer Modern",
     size: 11pt,
-    lang: "en"
+    lang: "en",
   )
-  
+
   set heading(numbering: "1.1.1")
-  
+
   show heading: it => {
     set text(weight: "bold", fill: rgb("#1f4788"))
     it
@@ -50,7 +49,7 @@
     figure(
       img,
       width: width,
-      caption: caption
+      caption: caption,
     )
   } else {
     figure(img)
@@ -64,7 +63,6 @@
 #let definition(title, body) = {
   block(
     fill: rgb("#f0f4f8"),
-    // stroke: gray,
     inset: 1.2em,
     radius: 6pt,
     width: 100%,
@@ -74,8 +72,8 @@
       *Definition: #title*
       #set text(weight: "regular", fill: black)
       #v(0.3em)
-      #body
-    ]
+      #emph[#body]
+    ],
   )
   v(0.8em)
 }
@@ -88,16 +86,14 @@
   block(
     stroke: black,
     inset: 1.2em,
-    // radius: 6pt,
     width: 100%,
     breakable: false,
     [
-      // #set text(weight: "bold", fill: rgb("#b45309"))
       *Theorem: #title*
       #set text(weight: "regular", fill: black)
       #v(0.3em)
-      #body
-    ]
+      #emph[#body]
+    ],
   )
   v(0.8em)
 }
@@ -108,17 +104,11 @@
 
 #let lemma(title, body) = {
   block(
-    fill: rgb("#f3f0ff"),
-    stroke: rgb("#7c3aed"),
-    inset: 1.2em,
-    radius: 6pt,
     width: 100%,
     [
-      #set text(weight: "bold", fill: rgb("#6d28d9"))
       *Lemma: #title*
       #set text(weight: "regular", fill: black)
-      #v(0.3em)
-      #body
+      #emph[#body]
     ]
   )
   v(0.8em)
@@ -141,45 +131,7 @@
       #body
       #h(1fr)
       $square$
-    ]
-  )
-  v(0.8em)
-}
-
-// ============================================================
-// EXAMPLE BOX
-// ============================================================
-
-#let example(title, body) = {
-  block(
-    fill: rgb("#f0fdf4"),
-    stroke: rgb("#16a34a"),
-    inset: 1.2em,
-    radius: 6pt,
-    width: 100%,
-    [
-      #set text(weight: "bold", fill: rgb("#166534"))
-      *Example: #title*
-      #set text(weight: "regular", fill: black)
-      #v(0.3em)
-      #body
-    ]
-  )
-  v(0.8em)
-}
-
-#let observation(body) = {
-  block(
-    fill: rgb("#f0fdf4"),
-    stroke: rgb("#16a34a"),
-    inset: 1.2em,
-    radius: 6pt,
-    width: 100%,
-    [
-      #set text(weight: "regular", fill: black)
-      #v(0.3em)
-      #body
-    ]
+    ],
   )
   v(0.8em)
 }
@@ -198,7 +150,7 @@
     [
       *#title* \
       #emph(body)
-    ]
+    ],
   )
 }
 
@@ -212,7 +164,7 @@
     [
       *#title* \
       #emph(body)
-    ]
+    ],
   )
 }
 
