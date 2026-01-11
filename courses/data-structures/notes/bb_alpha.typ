@@ -28,10 +28,12 @@ We analyze the amortized cost of `Insert` using the *potential method*. We assig
   We define the potential of the tree $Phi$ as the sum of contributions from individual nodes:
   $ Phi = sum_v phi(v) $
   where the contribution $phi(v)$ measures the imbalance at node $v$:
-  $ phi(v) = cases(
-    |s(v_l) - s(v_r)| &quad "if" |s(v_l) - s(v_r)| >= 2,
-    0 &quad "otherwise"
-  ) $
+  $
+    phi(v) = cases(
+      |s(v_l) - s(v_r)| & quad "if" |s(v_l) - s(v_r)| >= 2,
+      0 & quad "otherwise"
+    )
+  $
   Here, $s(v)$ is the size of the subtree at $v$, and $v_l, v_r$ are its children. The condition "$\ge 2$" ensures that a perfectly balanced tree (difference $\le 1$) has zero potential.
 
   *1. Cost of Insertion (without rebuild):*
@@ -43,7 +45,7 @@ We analyze the amortized cost of `Insert` using the *potential method*. We assig
   - *Potential change:* Before the rebuild, the imbalance was large. Specifically, since $s(v_l) > 2 s(v_r)$, the difference is linear in $s(v)$: $|s(v_l) - s(v_r)| > 1/3 s(v)$. Thus, $phi(v) in Omega(s(v))$.
   - After the rebuild, the subtree is perfectly balanced, so the new contributions of all nodes in the subtree are 0.
   - The drop in potential is $Delta Phi in -Omega(s(v))$.
-  
+
   By scaling the potential function (multiplying by a suitable constant), the drop in potential cancels out the real cost of rebuilding. Thus, the amortized cost of the rebuild is zero (or negative).
 
   *Conclusion:* The total amortized cost is dominated by the insertion path updates, which is $O(log n)$.

@@ -86,16 +86,16 @@ The key idea is lazy rebalancing: we allow the tree to become somewhat unbalance
 
 *Detailed Insert Operation Analysis*
 Suppose we want to insert a new point $p = (p_x, p_y)$.
-1.  *Update y-trees*: We traverse the path from the root of the x-tree to the leaf for $p_x$. For every node $v$ on this path, $p$ belongs to the subtree of $v$, so we must insert $p_y$ into the associated y-tree of $v$.
-    - There are $O(log n)$ such nodes.
-    - Each insertion into a y-tree (which is also a weight-balanced tree) takes amortized $O(log n)$ time.
-    - Total time for updating y-trees: $O(log^2 n)$.
+1. *Update y-trees*: We traverse the path from the root of the x-tree to the leaf for $p_x$. For every node $v$ on this path, $p$ belongs to the subtree of $v$, so we must insert $p_y$ into the associated y-tree of $v$.
+  - There are $O(log n)$ such nodes.
+  - Each insertion into a y-tree (which is also a weight-balanced tree) takes amortized $O(log n)$ time.
+  - Total time for updating y-trees: $O(log^2 n)$.
 
-2.  *Update x-tree*: We insert $p_x$ into the x-tree.
-    - If the x-tree becomes unbalanced at some node $v$, we must rebuild the entire subtree rooted at $v$.
-    - Rebuilding a subtree of size $m$ in the x-tree is expensive because we must also rebuild the y-trees for every node in that subtree. This takes $O(m log m)$ time (sorting points by y takes linear time if we merge lists from children, or $O(m log m)$ if we resort).
-    - However, in a weight-balanced tree, a node of size $m$ is rebuilt only after $Omega(m)$ updates have passed through it.
-    - Therefore, the amortized cost of rebuilding the x-tree per insertion is $O(log^2 n)$ (derived from charging $O(log n)$ cost at each of the $O(log n)$ levels).
+2. *Update x-tree*: We insert $p_x$ into the x-tree.
+  - If the x-tree becomes unbalanced at some node $v$, we must rebuild the entire subtree rooted at $v$.
+  - Rebuilding a subtree of size $m$ in the x-tree is expensive because we must also rebuild the y-trees for every node in that subtree. This takes $O(m log m)$ time (sorting points by y takes linear time if we merge lists from children, or $O(m log m)$ if we resort).
+  - However, in a weight-balanced tree, a node of size $m$ is rebuilt only after $Omega(m)$ updates have passed through it.
+  - Therefore, the amortized cost of rebuilding the x-tree per insertion is $O(log^2 n)$ (derived from charging $O(log n)$ cost at each of the $O(log n)$ levels).
 
 *Result*: The total amortized time complexity for *Insert* (and similarly *Delete*) is $O(log^2 n)$ for 2D trees. By induction, it is $O(log^d n)$ for $d$-dimensional trees.
 

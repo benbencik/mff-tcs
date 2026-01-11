@@ -93,12 +93,18 @@ In lock-free structures, we cannot free nodes immediately after popping because 
   inset: 10pt,
   align: horizon,
   [*Lock-based*], [*Lock-free*],
-  [Simple reasoning (mutual exclusion).], [Complex reasoning (linearizability, ABA).],
+  [Simple reasoning (mutual exclusion).],
+  [Complex reasoning (linearizability, ABA).],
+
   [Easy memory management.], [Hard memory management (reclamation).],
   [Deadlocks, Priority Inversion.], [No deadlocks.],
-  [Blocking (preemption halts progress).], [Non-blocking (resilient to preemption).],
-  [Fault intolerant (crash holds lock).], [Fault tolerant (crash doesn't block others).],
-  [Good for low contention.], [Good for high contention.]
+  [Blocking (preemption halts progress).],
+  [Non-blocking (resilient to preemption).],
+
+  [Fault intolerant (crash holds lock).],
+  [Fault tolerant (crash doesn't block others).],
+
+  [Good for low contention.], [Good for high contention.],
 )
 
 #small_question("Parallel (a,b)-trees")[

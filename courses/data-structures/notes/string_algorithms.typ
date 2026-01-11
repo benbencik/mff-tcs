@@ -19,7 +19,7 @@
 ]
 
 === Construction: Prefix Doubling (Karp-Miller-Rosenberg)
-Goal: Construct SA in $O(n log n)$. 
+Goal: Construct SA in $O(n log n)$.
 We iteratively sort suffixes by their prefixes of length $2^k$. In the first step, we sort by the first character. In step $k$, assuming we have computed ranks for prefixes of length $k$ (where $k$ is a power of 2), we can determine the order for length $2k$ by comparing pairs of ranks $(R[i], R[i+k])$. The first component determines the order of the first half (length $k$), and the second component determines the order of the second half. We repeat this doubling until the prefix length covers the whole string.
 
 
