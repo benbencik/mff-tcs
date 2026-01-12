@@ -2,9 +2,6 @@
 
 = Amortized Analysis
 
-#small_question("Dynamic Array")[
-  Describe a dynamic array, i.e., an "inflatable array" with growing and shrinking. Analyze its amortized complexity.
-]
 
 *Amortized analysis* provides a way to analyze the average performance of a sequence of operations, even when individual operations may be expensive. Unlike average-case analysis (which assumes probability distributions), amortized analysis considers the worst-case sequence of operations.
 
@@ -35,12 +32,13 @@ $
 Thus, if we can bound each $hat(C)_i$, we bound the total cost.
 
 == Application: Dynamic Arrays
-
-#definition("Dynamic Array")[
-  A dynamic array is a resizable array that automatically grows and shrinks. It maintains:
-  - *Size* $s$: Number of elements currently stored
-  - *Capacity* $c$: Allocated space ($c >= s$)
+#small_question("Dynamic Array")[
+  Describe a dynamic array, i.e., an "inflatable array" with growing and shrinking. Analyze its amortized complexity.
 ]
+
+A dynamic array is a resizable array that automatically grows and shrinks. It maintains:
+- *Size* $s$: Number of elements currently stored
+- *Capacity* $c$: Allocated space ($c >= s$)
 
 === Operations and Resizing Strategy
 
@@ -49,55 +47,15 @@ Thus, if we can bound each $hat(C)_i$, we bound the total cost.
 
   Shrinking at $1/4$ (not $1/2$) prevents thrashing: alternating insert/delete won't trigger repeated resizing.
 
-=== Amortized Analysis with Potential Method
+=== Amortized Analysis
 
-*Potential Function:*
-$
-  Phi = cases(
-    2s - c quad & "if" s >= c/2,
-    c/2 - s quad & "if" s < c/2
-  )
-$
+Let us analyze the cost of an arbitrary sequence of $m$ operations (inserts and deletes). We divide the sequence into *blocks*, where each block ends when the array is reallocated (or when the sequence ends).
 
-Note: $Phi >= 0$ always, and $Phi = 0$ initially.
+- The first block starts with capacity 1, so its reallocation takes constant time.
+- The last block does not end with a reallocation.
+- Consider any other block. It starts immediately after a reallocation, so at the beginning of the block, the number of elements is $s = c/2$.
+  - If the block ends with a *growth* (because $s$ reached $c$), the size must have increased from $c/2$ to $c$. Thus, at least $c - c/2 = c/2$ insertions must have occurred in this block.
+  - If the block ends with a *shrink* (because $s$ dropped to $c/4$), the size must have decreased from $c/2$ to $c/4$. Thus, at least $c/2 - c/4 = c/4$ deletions must have occurred.
 
-*Analysis of Insert:*
+In either case, a block ending with a reallocation of cost $Theta(c)$ contains at least $c/4 = Theta(c)$ operations. We can redistribute the cost of the reallocation to these operations, increasing the cost of each operation by a constant amount.
 
-1. *No resize* ($s < c$):
-  - Real cost: $C_i = 1$
-  - If $s >= c/2$: $Delta Phi = 2$, so $hat(C)_i = 1 + 2 = 3$
-  - If $s < c/2$: $Delta Phi = -1$, so $hat(C)_i = 1 - 1 = 0$
-  - Amortized cost: $O(1)$
-
-2. *Resize needed* ($s = c$):
-  - Real cost: $C_i = c + 1$ (copy $c$ elements + insert)
-  - Before: $s = c$, $Phi = 2c - c = c$
-  - After: $s = c + 1$, $c' = 2c$, $Phi' = 2(c+1) - 2c = 2$
-  - $Delta Phi = 2 - c$
-  - Amortized cost: $hat(C)_i = (c + 1) + (2 - c) = 3 = O(1)$
-
-*Analysis of Delete:*
-
-1. *No resize* ($s > c/4$):
-  - Real cost: $C_i = 1$
-  - $|Delta Phi| <= 2$
-  - Amortized cost: $hat(C)_i <= 3 = O(1)$
-
-2. *Resize needed* ($s = c/4$):
-  - Real cost: $C_i = c/4 + 1$ (copy $c/4$ elements + delete)
-  - Before: $s = c/4$, $Phi = c/2 - c/4 = c/4$
-  - After: $s = c/4 - 1$, $c' = c/2$, $Phi' approx 0$
-  - $Delta Phi approx -c/4$
-  - Amortized cost: $hat(C)_i = (c/4 + 1) - c/4 = 1 = O(1)$
-
-#theorem("Dynamic Array Amortized Complexity")[
-  Using the potential method, both insert and delete operations on a dynamic array have $O(1)$ amortized cost.
-]
-
-=== Key Insight
-
-Between any two consecutive resizing operations, at least $c/4$ regular operations must occur:
-- After doubling to size $c$, need $c/2$ inserts to fill again
-- After halving to size $c$, need $c/4$ deletes to trigger shrink
-
-Since resizing costs $O(c)$ and happens every $Omega(c)$ operations, the cost is "spread out" to $O(1)$ per operation.
