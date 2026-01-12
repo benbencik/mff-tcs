@@ -1,6 +1,6 @@
-# Data Structures Course
+# Data Structures 1: Lecture Notes
 
-Advanced study notes for the Data Structures course, focusing on algorithm analysis and specialized data structures.
+This repository advanced study notes for the Data Structures 1 course (NTIN066) from the Faculty of Mathematics and Physics, Charles University in Prague, for the academic year 2025/2026. These notes were created by AI, reviewed, and edited by a human, serving as supplementary learning material. They may not be an exact representation of the course content, and some parts might be omitted. Feel free to fix any mistakes and improve the text.
 
 ## Topics
 
@@ -12,13 +12,9 @@ Advanced study notes for the Data Structures course, focusing on algorithm analy
 - Range Trees and Geometric Data Structures
 - Suffix Arrays and String Algorithms
 
-## Resources
+## Typst
 
-- **Lecture Presentations:** `sources/lectures/` directory
-- **Figures:** Add screenshots and diagrams to `figs/` directory
-- **Template:** See `notes/00_template.typ` for structure
-
-## Compilation
+Typst is very user friendly. Like if markdown and latex had a baby. They have good docs and it is fast. Compile as follows:
 
 ```bash
 cd courses/data-structures
@@ -29,14 +25,5 @@ Or with watch mode for continuous updates:
 ```bash
 typst watch main.typ data-structures.pdf
 ```
-
-## Note Generation Process
-
-1. Review the corresponding lecture PDF in `sources/lectures/`
-2. See the root-level `NOTES_GENERATION.md` for detailed AI generation guidelines
-3. Create a new `.typ` file in `notes/` using the template
-4. Include 3-5 practice questions with solutions after each major section
-5. Add figures from `sources/` or screenshots to `figs/` as needed
-6. Uncomment the include line in `main.typ` to add the topic to the compiled document
 
 All notes use the local `lib.typ` for consistent styling and notation.
