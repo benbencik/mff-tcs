@@ -13,7 +13,7 @@
   - *d-Dimensions*: A primary tree on the first coordinate where each node stores a $(d-1)$-dimensional range tree on the remaining coordinates for the points in its subtree.
 ]
 
-=== Complexity Analysis
+== Complexity Analysis
 
 *Space Complexity*:
 Why does it take super-linear space?
@@ -51,7 +51,7 @@ How the query works:
   Define k-d trees and show that 2-d interval queries take $Omega(sqrt(n))$.
 ]
 
-=== k-d Trees
+== k-d Trees
 
 #definition("k-d Tree")[
   A binary tree that partitions space using hyperplanes orthogonal to coordinate axes.
@@ -74,7 +74,7 @@ How the query works:
   Show how to dynamize two-dimensional interval trees (i.e., Range trees); Insert is sufficient.
 ]
 
-=== Dynamic Range Trees
+== Dynamic Range Trees
 
 *The Challenge of Dynamization*
 Making range trees dynamic is non-trivial. Standard balanced binary search trees (like AVL or Red-Black trees) rely on *rotations* to maintain balance. In a multi-dimensional range tree, this strategy fails.

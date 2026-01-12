@@ -1,13 +1,13 @@
 #import "../lib.typ": *
 #set heading(numbering: "1.")
 
-== Hashing
+= Hashing
 
 #big_question("Hash Families & Chaining")[
   Define c-universal and k-independent families of hash functions. Give examples where a c-universal family is not enough, but a k-independent family must be used. Formulate and prove the theorem about the expected chain length in hashing with chaining. Show examples of c-universal and k-independent families for hashing natural numbers. For one example, prove c-universality or k-independence, for k >= 2.
 ]
 
-=== Hash Families
+== Hash Families
 
 #definition("Hash Families")[
   Let $cal(H)$ be a family of functions from $U$ to $[m]$.
@@ -61,7 +61,7 @@ While c-universality suffices for chaining, stronger independence is needed else
   Describe and analyze hashing with linear probing using a fully random hash function and, e.g., one-third fill factor. Describe the advantages and disadvantages compared to other data structures, especially those based on hashing.
 ]
 
-=== Linear Probing <linear-probing>
+== Linear Probing <linear-probing>
 
 *Mechanism*:
 We fix a hash function $h$ from $U$ to $[m]$. The probe sequence for $x$ will be $h(x), h(x)+1, h(x)+2, ...$, taken modulo $m$.
@@ -100,7 +100,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   Since $q < 1$, the term $q^(2^l)$ decays extremely fast (much faster than $2^l$ grows), so the sum converges to a constant.
 ]
 
-=== Scalar Product Hashing <scalar-product-hashing>
+== Scalar Product Hashing <scalar-product-hashing>
 
 #small_question("Scalar Product Hashing")[
   Describe a system of hash functions derived from scalar product. Prove that it is a 1-universal system from $ZZ_d^k$ to $ZZ_p$.
@@ -130,7 +130,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
   Describe a system of hash functions based on linear congruence. Prove that it is a 2-independent system from $ZZ_p$ to $[m]$ (you can use the lemma about modulo, which you should formulate but do not need to prove).
 ]
 
-=== Linear Congruence Hashing
+== Linear Congruence Hashing
 
 *Linear Congruence Family*: For any prime $p$ and $m <= p$, we define the family of linear functions $cal(L) = {h_(a,b) | a, b in [p]}$ from $[p]$ to $[m]$, where $h_(a,b)(x) = ((a x + b) mod p) mod m$.
 
@@ -147,7 +147,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
 ]
 
 
-=== k-independent Hashing <k-independent-hashing>
+== k-independent Hashing <k-independent-hashing>
 
 #small_question("k-independent Hashing")[
   Construct a k-independent system of hash functions from $ZZ_p$ to $[m]$. Justify k-independence (you can use the lemma about modulo, which you should formulate but do not need to prove).
@@ -168,7 +168,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
 ]
 
 
-=== Rolling Hash <rolling-hash>
+== Rolling Hash <rolling-hash>
 
 #small_question("Rolling Hash (Strings)")[
   Construct a 2-independent system hashing strings of length at most L over alphabet [a] to [m] based on polynomials, i.e., "rolling hash". Describe the advantage of using this system compared to other hash functions.
@@ -207,7 +207,7 @@ Advantages of the rolling hash:
   The final bucket index is then computed as $((A dot H_"new" + B) mod p) mod m$.
 2. *Space Efficiency*: Requires storing only $O(1)$ random parameters ($a, A, B$), unlike scalar product hashing which requires a random vector of size $d$.
 
-=== Bloom Filters
+== Bloom Filters
 
 #small_question("Bloom Filters")[
   Describe and analyze a Bloom filter. Give an example of its practical use.

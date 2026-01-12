@@ -37,7 +37,7 @@
   [Relies on recursive structure and optimal replacement policy (LRU).],
 )
 
-=== Sleator-Tarjan Theorem (LRU)
+== Sleator-Tarjan Theorem (LRU)
 
 #theorem("Sleator-Tarjan Competitiveness")[
   Let $C_"LRU"$ be the cost (number of cache misses) of the LRU strategy with cache size $M_"LRU"$.
@@ -70,7 +70,7 @@
 *Relevance to Cache-Oblivious*:
 Cache-oblivious algorithms are analyzed assuming an optimal cache replacement strategy. This theorem guarantees that if $M_"LRU" = 2 M_"OPT"$ then the LRU strategy is 2-competitive with the optimal caching strategy.
 
-=== Matrix Transposition ($N times N$)
+== Matrix Transposition ($N times N$)
 #small_question("Matrix Transposition")[
   Formulate a cache-oblivious algorithm for square matrix transposition. Analyze its time complexity and I/O complexity.
 ]
@@ -121,7 +121,7 @@ Cache-oblivious algorithms are analyzed assuming an optimal cache replacement st
   - *Total I/O*: The recursion does not actually load anything from the exetrnal memory. The transpose is handled at lower level therefore this algorithm inherits the optimal I/O complexity of the cache-aware algorithm.
 
 
-=== k-way Mergesort
+== k-way Mergesort
 #small_question("k-way Mergesort (Cache-Aware)")[
   Analyze k-way Mergesort in a cache-aware model. What is the optimal choice of k?
 ]

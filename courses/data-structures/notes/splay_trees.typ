@@ -1,6 +1,6 @@
 #import "../lib.typ": *
 
-= Splay Trees
+== Splay Trees
 
 #big_question("Splay Tree")[
   Define a Splay tree. Describe how the Splay, Find, Insert, and Delete operations work on it. Describe the advantages and disadvantages compared to other data structures, especially balanced search trees. State and prove the theorem about the amortized complexity of the Splay operation.

@@ -6,15 +6,13 @@
   Describe a dynamic array, i.e., an "inflatable array" with growing and shrinking. Analyze its amortized complexity.
 ]
 
-=== Introduction
-
 *Amortized analysis* provides a way to analyze the average performance of a sequence of operations, even when individual operations may be expensive. Unlike average-case analysis (which assumes probability distributions), amortized analysis considers the worst-case sequence of operations.
 
 #definition("Amortized Cost")[
   The amortized cost of an operation is the average cost per operation over a worst-case sequence of operations. If $n$ operations have total cost $T(n)$, the amortized cost per operation is $T(n)/n$.
 ]
 
-=== The Potential Method
+== The Potential Method
 
 The *potential method* is a technique for amortized analysis that assigns a "potential" $Phi$ to the data structure state.
 
@@ -36,7 +34,7 @@ $
 
 Thus, if we can bound each $hat(C)_i$, we bound the total cost.
 
-=== Application: Dynamic Arrays
+== Application: Dynamic Arrays
 
 #definition("Dynamic Array")[
   A dynamic array is a resizable array that automatically grows and shrinks. It maintains:
@@ -44,14 +42,14 @@ Thus, if we can bound each $hat(C)_i$, we bound the total cost.
   - *Capacity* $c$: Allocated space ($c >= s$)
 ]
 
-==== Operations and Resizing Strategy
+=== Operations and Resizing Strategy
 
 - *Insert*: Add element at the end. If $s = c$, allocate new array of size $2c$, copy all elements.
 - *Delete*: Remove element from the end. If $s = c/4$, allocate new array of size $c/2$, copy all elements.
 
   Shrinking at $1/4$ (not $1/2$) prevents thrashing: alternating insert/delete won't trigger repeated resizing.
 
-==== Amortized Analysis with Potential Method
+=== Amortized Analysis with Potential Method
 
 *Potential Function:*
 $
@@ -96,7 +94,7 @@ Note: $Phi >= 0$ always, and $Phi = 0$ initially.
   Using the potential method, both insert and delete operations on a dynamic array have $O(1)$ amortized cost.
 ]
 
-==== Key Insight
+=== Key Insight
 
 Between any two consecutive resizing operations, at least $c/4$ regular operations must occur:
 - After doubling to size $c$, need $c/2$ inserts to fill again

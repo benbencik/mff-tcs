@@ -1,6 +1,6 @@
 #import "../lib.typ": *
 
-== String Algorithms
+= String Algorithms
 
 #big_question("Suffix Array & LCP")[
   Define a suffix array and an LCP array. Describe and analyze algorithms for their construction (for suffix arrays, almost linear time is sufficient). Describe an example problem that these arrays can solve effectively.
@@ -10,7 +10,7 @@
   Let $S$ be a string of length $n$. The Suffix Array $"SA"$ is a permutation of indices ${0, ..., n-1}$ such that $S["SA"[0]..] < S["SA"[1]..] < ... < S["SA"[n-1]..]$ lexicographically. Essentially, it stores the starting indices of all suffixes of $S$ in sorted order. The inverse suffix array is called *rank array* $R[i]$, which determines the lexicographic position of suffix $"SA"[I:]$.
 ]
 
-=== Construction: Prefix Doubling (Karp-Miller-Rosenberg)
+== Construction: Prefix Doubling (Karp-Miller-Rosenberg)
 Goal: Construct SA in $O(n log n)$.
 
 *Main Idea*:
@@ -45,7 +45,7 @@ There are $O(log n)$ steps. Each step uses Radix Sort taking $O(n)$. Total time:
   Defined for $i=1..n-1$. $"LCP"[0]$ is usually undefined or 0.
 ]
 
-=== Construction: LCP Array (Kasai's Algorithm)
+== Construction: LCP Array (Kasai's Algorithm)
 Goal: Construct LCP in $O(n)$ given SA and S.
 
 *Key Observation*:
@@ -66,12 +66,12 @@ If $"LCP"["rank"[i]] = h$, then $"LCP"["rank"[i+1]] >= h-1$.
 ```
 *Complexity*: The pointer for comparison increases $h$. $h$ decreases by at most 1 per iteration. Total increments bounded by $2n$. Time $O(n)$.
 
-=== Applications: Pattern Matching
+== Applications: Pattern Matching
 Find $P$ in $S$.
 - Binary search on $"SA"$. Comparison takes $O(|P|)$. Total $O(|P| log n)$.
 - With $"LCP"$ and precomputed $"RMQ"$ (Range Minimum Query), can be $O(|P| + log n)$.
 
-=== Longest Common Substring
+== Longest Common Substring
 
 #small_question("Longest Common Substring")[
   Show how to use a suffix array and an LCP array to find the longest common substring of two strings.

@@ -1,12 +1,10 @@
 #import "../lib.typ": *
 
-= BB[α]-Trees
+== BB[α]-Trees
 
 #small_question("BB[α]-Trees")[
   Describe search trees with lazy balancing (BB[α]-trees). Analyze their amortized complexity. Give an example of their use.
 ]
-
-=== Definition and Balance
 
 #definition("BB[α] Tree")[
   BB[$alpha$] (Bounded Balance) trees are weight-balanced trees. For every node $v$, let $s(v)$ be the number of nodes in the subtree rooted at $v$ (including $v$). If $v_l$ and $v_r$ are the left/right children, the balance condition for parameter $alpha in (0, 1/2]$ is:

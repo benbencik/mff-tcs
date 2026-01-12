@@ -6,7 +6,6 @@
   Describe locks and atomic CAS and LL/SC operations. Design and analyze a lock-free stack. Explain the ABA problem and propose its solution. Compare the parallelization of data structures using locks versus using atomic operations (so-called lock-free data structures), explaining potential problems in both cases.
 ]
 
-=== Locks and Problems
 
 *Locks (Mutexes)* are synchronization primitives that enforce mutual exclusion. At any moment, a mutex is either locked or unlocked.
 - *LOCK*: Waits until unlocked, then locks it.
@@ -20,7 +19,7 @@
 - *Blocking*: Stalled thread halts others waiting for the lock.
 - *Fault tolerance*: If a thread crashes holding a lock, the system hangs.
 
-=== Atomic Primitives
+== Atomic Primitives
 
 Atomic operations are indivisible instructions on shared memory (atomic registers). They are the building blocks for lock-free structures.
 
@@ -31,7 +30,7 @@ Atomic operations are indivisible instructions on shared memory (atomic register
 - *Compare and Swap (CAS)*: `CAS(R, old, new)` atomically sets register `R` to `new` only if it currently equals `old`. Returns the original value.
 - *Load Linked / Store Conditional (LL/SC)*: `LL` reads a value. `SC` writes a new value only if the address hasn't changed since `LL`.
 
-=== Lock-free Stack (Treiber Stack)
+== Lock-free Stack (Treiber Stack)
 
 A stack implemented using a linked list and CAS on the head pointer.
 
@@ -62,7 +61,7 @@ A stack implemented using a linked list and CAS on the head pointer.
 - *Progress*: Lock-free. If a CAS fails, it means another process succeeded, so system-wide progress is guaranteed.
 - *Livelock*: Possible theoretically, but rare in practice.
 
-=== The ABA Problem
+== The ABA Problem
 
 *Definition*: A subtle bug where a pointer is recycled. Process $P_1$ reads value $A$. Process $P_2$ changes it to $B$ and then back to $A$. $P_1$'s CAS succeeds (seeing $A$), assuming nothing changed, but the state is actually different (e.g., node $A$ was freed and reallocated).
 
@@ -77,7 +76,6 @@ A stack implemented using a linked list and CAS on the head pointer.
 2. *Versioned Pointers (Wide CAS)*: Store `{ptr, version}`. Increment version on every update. CAS checks both.
 3. *Hazard Pointers / GC*: Delay memory reclamation so $A$ isn't reused while $P_1$ holds a reference.
 
-=== Memory Reclamation (Safe Memory Reuse)
 
 In lock-free structures, we cannot free nodes immediately after popping because other threads might have read pointers to them.
 
@@ -86,7 +84,6 @@ In lock-free structures, we cannot free nodes immediately after popping because 
 - *Hazard Pointers*: Threads publish pointers they are accessing. Nodes are freed only when no hazard pointers reference them.
 - *Epochs / RCU*: Free nodes only after all threads have passed a "quiescent" state.
 
-=== Comparison: Locks vs. Lock-free
 
 #table(
   columns: (1fr, 1fr),
@@ -111,7 +108,7 @@ In lock-free structures, we cannot free nodes immediately after popping because 
   Show how to parallelize an (a,b)-tree using locks.
 ]
 
-=== Locking Strategies in Search Trees
+== Locking Strategies in Search Trees
 
 To parallelize tree operations, we avoid locking the entire tree.
 
@@ -123,7 +120,7 @@ To parallelize tree operations, we avoid locking the entire tree.
 - For `Find` / `Insert` (top-down), lock a small window (e.g., node and child).
 - Allows concurrent access to different parts of the tree.
 
-=== Parallel (a,b)-trees
+== Parallel (a,b)-trees
 
 We use a *top-down* approach (preemptive splitting/merging) to avoid upward propagation, allowing efficient fine-grained locking.
 
