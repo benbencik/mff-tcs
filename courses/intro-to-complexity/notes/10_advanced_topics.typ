@@ -93,32 +93,30 @@ Trivial algorithm: $O(N^2 d)$.
 
 *#smallcaps[OV] Conjecture:* For every $epsilon > 0$, #smallcaps[OV] cannot be solved in $O(N^(2-epsilon))$ (assuming $d approx log N$).
 
-*Reduction #smallcaps[SETH] => #smallcaps[OV]:*
-We show that if #smallcaps[OV] can be solved faster than quadratic time, then #smallcaps[CNF-SAT] can be solved faster than $2^n$.
+*Reduction #smallcaps[SETH] $=>$ #smallcaps[OV] (Contrapositive):*
+We prove that if the #smallcaps[OV] Conjecture is false, then #smallcaps[SETH] is false.
+Specifically, we show that if #smallcaps[OV] can be solved in time $cal(O)(N^(2-delta))$ for some $delta > 0$, then $k$-#smallcaps[SAT] can be solved in time $cal(O)(2^{(1 - delta/2)n})$, which contradicts #smallcaps[SETH] (as the exponent $1 - delta/2$ is strictly less than 1 and independent of $k$).
 
 *Construction:*
-Let $phi = C_1 and ... and C_m$ be a $k$-#smallcaps[CNF] formula with $n$ variables $x_1, ..., x_n$.
-1. Split variables into two sets $X_1 = {x_1, ..., x_(n/2)}$ and $X_2 = {x_(n/2+1), ..., x_n}$.
-2. Let $A$ be the set of all $2^(n/2)$ partial assignments $alpha: X_1 -> {0, 1}$.
-  For each $alpha$, construct vector $a^alpha in {0, 1}^m$ where $a^alpha [j] = 0$ if assignment $alpha$ satisfies clause $C_j$, and $1$ otherwise.
-3. Let $B$ be the set of all $2^(n/2)$ partial assignments $beta: X_2 -> {0, 1}$.
-  For each $beta$, construct vector $b^beta in {0, 1}^m$ where $b^beta [j] = 0$ if assignment $beta$ satisfies clause $C_j$, and $1$ otherwise.
+Let $phi = C_1 and ... and C_m$ be a $k$-#smallcaps[CNF] formula with $n$ variables.
+1.  Split variables into two sets $X_1 = {x_1, ..., x_(n/2)}$ and $X_2 = {x_(n/2+1), ..., x_n}$.
+2.  Construct set $A$ consisting of all $N = 2^(n/2)$ partial assignments $alpha: X_1 -> {0, 1}$.
+    For each $alpha$, create a vector $a^alpha in {0, 1}^m$ where $a^alpha [j] = 0$ if assignment $alpha$ *satisfies* clause $C_j$, and $1$ otherwise.
+3.  Construct set $B$ consisting of all $N = 2^(n/2)$ partial assignments $beta: X_2 -> {0, 1}$.
+    For each $beta$, create a vector $b^beta in {0, 1}^m$ where $b^beta [j] = 0$ if assignment $beta$ *satisfies* clause $C_j$, and $1$ otherwise.
 
 *Correctness:*
-For any pair of partial assignments $alpha$ and $beta$, let $alpha circle beta$ be the combined assignment for all $n$ variables.
-$
-  a^alpha dot b^beta = 0 &<=> forall j in {1, ..., m}: a^alpha [j] dot b^beta [j] = 0 \
-  &<=> forall j: (alpha text(" satisfies ") C_j) or (beta text(" satisfies ") C_j) \
-  &<=> alpha circle beta text(" satisfies ") phi
-$
-Thus, $phi$ is satisfiable iff there exist orthogonal vectors $a^alpha in A, b^beta in B$.
+For any pair of partial assignments $alpha$ and $beta$, let $alpha circle.small beta$ be the full assignment.
+$ a^alpha dot b^beta = 0 &<=> forall j in {1, ..., m}: a^alpha [j] dot b^beta [j] = 0 \
+&<=> forall j: (a^alpha [j] = 0) or (b^beta [j] = 0) \
+&<=> forall j: (alpha text(" satisfies ") C_j) or (beta text(" satisfies ") C_j) \
+&<=> alpha circle.small beta text(" satisfies ") phi $
+Thus, $phi$ is satisfiable iff there exists a pair of vectors $a^alpha in A, b^beta in B$ that are orthogonal.
 
 *Complexity Analysis:*
-- Number of vectors $N = |A| = |B| = 2^(n/2)$.
-- Dimension $d = m = O(n^k)$.
-- If #smallcaps[OV] can be solved in $O(N^(2-epsilon))$, then satisfiability can be decided in:
-  $
-    O((2^(n/2))^(2-epsilon) dot "poly"(n)) = O(2^(n(1-epsilon/2)) dot "poly"(n))
-  $
-- This would contradict #smallcaps[SETH] (since $1 - epsilon/2 < 1$).
-Therefore, assuming #smallcaps[SETH], #smallcaps[OV] requires essentially quadratic time.
+- Size of sets: $N = |A| = |B| = 2^(n/2)$.
+- Dimension: $d = m$. For $k$-SAT, $m = cal(O)(n^k)$.
+- If #smallcaps[OV] can be solved in $cal(O)(N^(2-delta))$, then satisfiability can be decided in:
+  $ T(n) = cal(O)(N^(2-delta) dot "poly"(d)) = cal(O)((2^(n/2))^(2-delta) dot "poly"(n)) = cal(O)(2^(n(1-delta/2)) dot "poly"(n)) $
+- This algorithm solves $k$-#smallcaps[SAT] in time $cal(O)(2^(c n))$ where $c = 1 - delta/2 < 1$.
+- Since this speedup $c$ depends only on the OV algorithm's $delta$ and not on $k$, it applies for all $k$. This implies $s_k \le 1 - delta/2$ for all $k$, so $lim_(k -> oo) s_k \le 1 - delta/2 < 1$, violating #smallcaps[SETH].
