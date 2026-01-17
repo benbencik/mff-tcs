@@ -42,7 +42,7 @@ All these variants are equivalent in power to the standard single-tape determini
 ]
 
 
-#question("(B2) RAM and equivalence with Turing machines")[
+#question_B("(B2) RAM and equivalence with Turing machines")[
   Explain the Random Access Machine (RAM) model and prove its equivalence with Turing machines.
 ]
 
@@ -79,12 +79,12 @@ A key result in computability theory is that RAMs and Turing machines are equiva
   - *Output tape*: Here $M$ writes the same output that $R$ writes on output
 
   $M$ simulates the execution cycle of $R$:
-  1.  *Fetch:* The current instruction is determined by the state of $M$.
-  2.  *Execute:*
-      -   For `LOAD C, r_i`: $M$ writes $C$ to the Working Tape, scans the Memory Tape for index $i$. If found, it updates the value. If not, it appends $\# i \# C$ to the end.
-      -   For `ADD r_i, r_j, r_k`: $M$ finds values of $r_i$ and $r_j$ on the Memory Tape, copies them to the Working Tape, performs addition, and updates $r_k$ on the Memory Tape (shifting the tape content if the length of $v_k$ changes).
-      -   For `READ r_i`: $M$ reads a symbol from the Input Tape and stores it in $r_i$.
-      -   For `JNZ r_i, label`: $M$ checks if $r_i$ is non-zero on the Memory Tape. If so, it transitions to the state corresponding to `label`.
+  1. *Fetch:* The current instruction is determined by the state of $M$.
+  2. *Execute:*
+    - For `LOAD C, r_i`: $M$ writes $C$ to the Working Tape, scans the Memory Tape for index $i$. If found, it updates the value. If not, it appends $\# i \# C$ to the end.
+    - For `ADD r_i, r_j, r_k`: $M$ finds values of $r_i$ and $r_j$ on the Memory Tape, copies them to the Working Tape, performs addition, and updates $r_k$ on the Memory Tape (shifting the tape content if the length of $v_k$ changes).
+    - For `READ r_i`: $M$ reads a symbol from the Input Tape and stores it in $r_i$.
+    - For `JNZ r_i, label`: $M$ checks if $r_i$ is non-zero on the Memory Tape. If so, it transitions to the state corresponding to `label`.
 
   Since RAM instructions (arithmetic, memory access) can be simulated by TM subroutines in finite steps (relative to data size), $M$ can simulate $R$.
 
@@ -93,19 +93,19 @@ A key result in computability theory is that RAMs and Turing machines are equiva
   We construct a RAM program $R$ to simulate a Turing machine $M = (Q, Sigma, delta, q_0, F)$.
 
   *Representation:*
-  -   The tape is represented by registers. We map cell $k$ to register $r_k$ (mapping $ZZ$ to $NN$ if necessary).
-  -   Register $r_{"head"}$ stores the head position.
-  -   Register $r_{"state"}$ stores the current state index.
+  - The tape is represented by registers. We map cell $k$ to register $r_k$ (mapping $ZZ$ to $NN$ if necessary).
+  - Register $r_{"head"}$ stores the head position.
+  - Register $r_{"state"}$ stores the current state index.
 
   *Simulation:*
   $R$ runs an infinite loop:
-  1.  *Read Symbol:* Use indirect addressing to read the cell under the head: `COPY [r_head], r_symbol`.
-  2.  *Transition:* Based on $r_{"state"}$ and $r_{"symbol"}$, determine the next action using conditional jumps.
-  3.  *Execute Action:*
-      -   Update $r_{"state"}$ to the new state.
-      -   Write the new symbol: `COPY r_new_symbol, [r_head]`.
-      -   Update $r_{"head"}$ (increment or decrement).
-  4.  *Check Termination:* If the new state is accepting/rejecting, $R$ halts.
+  1. *Read Symbol:* Use indirect addressing to read the cell under the head: `COPY [r_head], r_symbol`.
+  2. *Transition:* Based on $r_{"state"}$ and $r_{"symbol"}$, determine the next action using conditional jumps.
+  3. *Execute Action:*
+    - Update $r_{"state"}$ to the new state.
+    - Write the new symbol: `COPY r_new_symbol, [r_head]`.
+    - Update $r_{"head"}$ (increment or decrement).
+  4. *Check Termination:* If the new state is accepting/rejecting, $R$ halts.
 
   Thus, a RAM can simulate a Turing Machine.
 ]

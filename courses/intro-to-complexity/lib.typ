@@ -171,7 +171,22 @@
   v(0.8em)
 }
 
-#let question(title, body) = {
+
+#let question_A(title, body) = {
+  block(
+    stroke: rgb("#ff9999"),
+    fill: rgb("#fff3f3"),
+    inset: 1em,
+    radius: 5pt,
+    width: 100%,
+    [
+      *#title* \
+      #emph(body)
+    ],
+  )
+}
+
+#let question_B(title, body) = {
   block(
     stroke: rgb("#ffd399"),
     fill: rgb("#fffbe6"),
