@@ -218,6 +218,9 @@ It holds that if $A scripts(<=)_m B$ and the language $B$ is (partially decidabl
   1. Simulate $M$ on input $x$.
   2. If $M$ accepts $x$, then simulate $M_1$ on $y$.
   3. If $M_1$ accepts $y$, then accept.
+  4. Otherwise, reject
+
+  #fig("rice-theorem.png")
 
   *Correctness:*
   - If $M$ accepts $x$ ($x in L(M)$): The simulation proceeds to step 2, and $M'$ behaves exactly like $M_1$. Thus $L(M') = L(M_1) = L_1$. Since $L_1 in cal(C)$, we have $chevron.l M' chevron.r in L_cal(C)$.
