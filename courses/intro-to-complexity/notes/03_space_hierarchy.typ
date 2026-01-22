@@ -13,8 +13,8 @@ Space complexity measures the amount of memory (space) required by a Turing mach
 
 #definition("Space Complexity Classes")[
   Let $f: bb(N) -> bb(N)$ be a function.
-  - #smallcaps[SPACE] ($f(n)$) is the class of languages decided by a deterministic Turing machine that uses cal(O)(f(n)) space.
-  - #smallcaps[NSPACE] ($f(n)$) is the class of languages decided by a nondeterministic Turing machine that uses cal(O)(f(n)) space.
+  - #smallcaps[SPACE] ($f(n)$) is the class of languages decided by a deterministic Turing machine that uses $cal(O)(f(n))$ space.
+  - #smallcaps[NSPACE] ($f(n)$) is the class of languages decided by a nondeterministic Turing machine that uses $cal(O)(f(n))$ space.
 ]
 
 Common space complexity classes:
@@ -33,12 +33,12 @@ There are fundamental relationships between the time and space resources require
 ]
 
 #proof[
-  We need to show that if a language $L$ is decided by a nondeterministic Turing machine $N$ in time cal(O)(f(n)), then it can be decided by a deterministic Turing machine $D$ in space cal(O)(f(n)).
+  We need to show that if a language $L$ is decided by a nondeterministic Turing machine $N$ in time $cal(O)(f(n))$, then it can be decided by a deterministic Turing machine $D$ in space $cal(O)(f(n))$.
 
   *1. Space usage of $N$ on a single path*
   Consider any single computation path of $N$ on input $x$ of length $n$. $N$ runs for at most $T = c dot f(n)$ steps for some constant $c$.
   In one computational step, the tape head of a Turing machine can move at most one cell distance from its current position. Starting from the initial position, after $T$ steps, the head can reach at most the cells in the range [-T, T] relative to the start. Thus, the machine can visit (read or write) at most $T + 1$ distinct tape cells.
-  Consequently, on any single execution branch, $N$ uses space bounded by cal(O)(f(n)).
+  Consequently, on any single execution branch, $N$ uses space bounded by $cal(O)(f(n))$.
 
   *2. Deterministic simulation*
   We construct a deterministic machine $D$ that simulates $N$. Since $N$ is nondeterministic, its computation forms a tree where each node represents a configuration and branches represent possible transitions. $D$ performs a search (e.g., Depth-First Search) on this tree to determine if an accepting configuration is reachable.
@@ -53,10 +53,10 @@ There are fundamental relationships between the time and space resources require
 
   *3. Total Space Analysis*
   Machine $D$ needs space for:
-  - *Keeping track of the current path:* $D$ stores the sequence $y$, which has length proportional to the time bound of $N$, i.e., cal(O)(f(n)).
-  - *Simulation:* $D$ needs to store the tape contents of $N$ for the current simulation. As established in step 1, this requires at most cal(O)(f(n)) space. $D$ can reuse this space for each path.
+  - *Keeping track of the current path:* $D$ stores the sequence $y$, which has length proportional to the time bound of $N$, i.e., $cal(O)(f(n))$.
+  - *Simulation:* $D$ needs to store the tape contents of $N$ for the current simulation. As established in step 1, this requires at most $cal(O)(f(n))$ space. $D$ can reuse this space for each path.
 
-  The total space required by $D$ is sum of these, which remains cal(O)(f(n)). Thus, $L in #smallcaps("SPACE") (f(n))$.
+  The total space required by $D$ is sum of these, which remains $cal(O)(f(n))$. Thus, $L in #smallcaps("SPACE") (f(n))$.
 ]
 
 
@@ -68,7 +68,7 @@ There are fundamental relationships between the time and space resources require
 #theorem("Nondeterministic Space vs. Time")[
   For any function $f(n) >= log n$,
   $
-    #smallcaps("NSPACE") (f(n)) subset.eq union.big_(c in bb(N)) #smallcaps("TIME") 2^(c f(n))
+    L in #smallcaps[NSPACE] (f(n)) ==> exists c_L in NN: L in #smallcaps[TIME] (2^(c_L f(n))) 
   $
 ]
 
@@ -93,9 +93,9 @@ There are fundamental relationships between the time and space resources require
 
   We can model the computation of $M$ as a directed graph $G_M = (V, E)$, where vertices are configurations and edges represent valid transitions according to $delta$. $M$ accepts $x$ if and only if there is a path from the start configuration to an accepting configuration in $G_M$.
 
-  This reachability problem can be solved by a deterministic search algorithm (e.g., BFS or DFS). The time complexity is proportional to the size of the graph, i.e., cal(O)(|V| + |E|). Since the number of possible next moves from any configuration is bounded by a constant (the degree of nondeterminism), we have $|E| = cal(O)(|V|)$.
+  This reachability problem can be solved by DFS. The time complexity is proportional to the size of the graph, i.e., $cal(O)(|V| + |E|)$. Since the number of possible next moves from any configuration is bounded by a constant (the degree of nondeterminism), we have $|E| = cal(O)(|V|)$.
 
-  Therefore, the deterministic time required is cal(O)(|V|) = cal(O)(2^(c_M f(n))). This shows that $L in #smallcaps("TIME") (2^(c f(n)))$ for some constant $c$.
+  Therefore, the deterministic time required is $cal(O)(|V|) = cal(O)(2^(c_M f(n)))$. This shows that $L in #smallcaps("TIME") (2^(c f(n)))$ for some constant $c$.
 
 ]
 

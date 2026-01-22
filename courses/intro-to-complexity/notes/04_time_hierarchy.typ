@@ -33,7 +33,7 @@ Common time-constructible functions include $n log n$, $n sqrt(n)$, polynomials 
 Similar to space, giving a machine more time allows it to solve strictly more problems. However, the gap required is slightly larger due to simulation overhead.
 
 #theorem("Time Hierarchy Theorem")[
-  For any time-constructible function $f: bb(N) -> bb(N)$, there exists a language $L$ such that $L$ is decidable in time cal(O)(f(n)) but not in time $o(f(n) / log(f(n)))$.
+  For any time-constructible function $f: bb(N) -> bb(N)$, there exists a language $L$ such that $L$ is decidable in time $cal(O)(f(n))$ but not in time $o(f(n) / log(f(n)))$.
 ]
 
 #proof[
@@ -70,20 +70,20 @@ Similar to space, giving a machine more time allows it to solve strictly more pr
   - *Counter Update Cost:* The counter has value roughly $f(n) / log(f(n))$, so it has $cal(O)(log(f(n)))$ bits. Decrementing and moving these bits takes $cal(O)(log(f(n)))$ time per step.
   - *Total Time:*
     $ "Time"(D) & approx T dot ("Simulation Cost" + "Counter Cost") \
-                & approx (f(n) / log(f(n))) dot (c_M + log(f(n)) \
+                & approx (f(n) / log(f(n))) dot (c_M + log(f(n))) \
                 & = cal(O)(f(n)) $
   Thus, $D$ runs in time $cal(O)(f(n))$.
 
   *Correctness (Diagonalization):*
-  Assume for contradiction that there exists a machine $M$ that decides $L(D)$ in time $g(n) in o(f(n) / log f(n))$.
+  Assume for contradiction that there exists a machine $M$ that decides $L(D)$ in time $g(n) in o(f(n) / log(f(n)))$.
   Let $c_M$ be the constant simulation overhead for machine $M$ (i.e., one step of $M$ takes at most $c_M$ steps of $D$, effectively $c_M$ covers the constant factor in the $O(log f(n))$ counter update per step).
 
-  From the definition of $o(dot)$, since $g(n) in o(f(n) / log f(n))$, it implies that for any constant $epsilon > 0$ (specifically choosing $epsilon = 1/c_M$), the function $g(n)$ is eventually bounded by $epsilon dot (f(n) / log f(n))$.
+  From the definition of $o(dot)$, since $g(n) in o(f(n) / log(f(n)))$, it implies that for any constant $epsilon > 0$ (specifically choosing $epsilon = 1/c_M$), the function $g(n)$ is eventually bounded by $epsilon dot (f(n) / log(f(n)))$.
   Formally:
-  $ exists n_0 in bb(N) med forall n >= n_0: c_M dot g(n) <= f(n) / log f(n) $
+  $ exists n_0 in bb(N) med forall n >= n_0: c_M dot g(n) <= f(n) / log(f(n)) $
 
   Now, consider an input $x = chevron.l M chevron.r 10^k$ where $k$ is chosen such that $n = |x| >= n_0$.
-  The simulation of $M(x)$ by $D$ requires at most $c_M dot g(n)$ steps. Since $n >= n_0$, we have $c_M dot g(n) <= f(n) / log f(n) approx T$. Thus, $D$ will complete the simulation of $M$ without running out of time.
+  The simulation of $M(x)$ by $D$ requires at most $c_M dot g(n)$ steps. Since $n >= n_0$, we have $c_M dot g(n) <= f(n) / log(f(n)) approx T$. Thus, $D$ will complete the simulation of $M$ without running out of time.
 
   - *Case 1: $M(x)$ accepts.*
     $D$ completes the simulation, sees that $M$ accepted, and thus $D$ *rejects*.

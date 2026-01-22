@@ -84,7 +84,7 @@ The kernelization algorithm applies the following reduction rules exhaustively:
   - Total vertices: $|V| = |S| + |V without S| lt.eq k + k^2$.
 ]
 
-The resulting kernel has size cal(O)(k^2).
+The resulting kernel has size $cal(O)(k^2)$.
 
 
 #question_B(
@@ -110,8 +110,8 @@ To check if $G$ has a VC of size $k$:
 The depth of the recursion tree is at most $k$.
 At each step, we branch into 2 subproblems.
 Total nodes in the tree: $2^k$.
-Work per node: cal(O)(n).
-Total runtime: cal(O)(2^k dot n).
+Work per node: $cal(O)(n)$.
+Total runtime: $cal(O)(2^k dot n)$.
 This shows Vertex Cover is in #smallcaps[FPT].
 
-(Note: The simple bounded search tree algorithm presented yields an cal(O)(2^k dot n) runtime. More advanced branching rules and techniques can achieve significantly better runtimes, such as cal(O)(1.2738^k + k n).)
+(Note: The simple bounded search tree algorithm presented yields an $cal(O)(2^k dot n)$ runtime. More advanced branching rules and techniques can achieve significantly better runtimes, such as $cal(O)(1.2738^k + k n)$.)

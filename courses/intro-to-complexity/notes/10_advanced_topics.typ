@@ -21,8 +21,10 @@ Modern cryptography relies on the assumption that certain computational problems
 ]
 
 Candidates for OWF:
-- Integer factorization (multiplication is easy, factoring is hard).
-- Discrete logarithm.
+- *Integer factorization:* $f(p, q) = p dot q$. Multiplication is easy, but factoring large integers is believed to be hard.
+- *Discrete logarithm:* $f_(g,p)(x) = g^x mod p$. Exponentiation is easy, but finding the discrete logarithm is assumed to be hard.
+- *Subset Sum:* $f(x_1, ..., x_n, J) = (x_1, ..., x_n, sum_(j in J) x_j mod 2^n)$. Inverting this is related to the NP-hard Subset Sum problem.
+- *Goldreich's Candidate:* Based on a random bipartite graph and a local predicate $P$. $f(x)$ outputs values computed by applying $P$ to subsets of input bits determined by the graph edges.
 
 === Pseudorandom Generators (PRG)
 
@@ -32,14 +34,16 @@ Candidates for OWF:
   2. $l(n) > n$ for every $n in bb(N)$ (stretch).
   3. For every probabilistic polynomial-time algorithm $cal(A)$, it holds that
     $
-      | Pr_(y in {0,1}^(l(n))) [cal(A)(y) = 1] - Pr_(x in {0,1}^n) [cal(A)(G(x)) = 1] | lt.eq epsilon(n)
+      | op("Pr")_(y in {0,1}^(l(n))) [cal(A)(y) = 1] - op("Pr")_(x in {0,1}^n) [cal(A)(G(x)) = 1] | lt.eq epsilon(n)
     $
     for some negligible function $epsilon(n)$.
 ]
 
 A function $epsilon(n)$ is *negligible* if for every polynomial $p(n)$, there exists $n_0$ such that for all $n > n_0$, $epsilon(n) < 1/p(n)$.
 
-*Connection:* It has been proven that *One-Way Functions exist if and only if Pseudorandom Generators exist* (HILL Theorem).
+*Connection:* One-Way Functions exist if and only if Pseudorandom Generators exist.
+- *PRG $=>$ OWF:* If a pseudorandom generator exists, then one-way functions exist.
+- *OWF $=>$ PRG:* If a one-way function exists, then pseudorandom generators exist (HILL Theorem).
 
 === Symmetric Encryption
 
@@ -91,7 +95,7 @@ This implies that for any $epsilon > 0$, there exists a $k$ such that $k$-#small
 *Problem:* Given two sets $A, B$ of $N$ vectors in $\{0, 1\}^d$, are there $u in A, v in B$ such that $u dot v = 0$ (orthogonal)?
 Trivial algorithm: $O(N^2 d)$.
 
-*#smallcaps[OV] Conjecture:* For every $epsilon > 0$, #smallcaps[OV] cannot be solved in $O(N^(2-epsilon))$ (assuming $d approx log N$).
+*#smallcaps[OV] Conjecture:* For every $epsilon > 0, c > 0$, #smallcaps[OV] cannot be solved in $O(N^(2-epsilon)d^c)$ (assuming $d approx log N$).
 
 *Reduction #smallcaps[SETH] $=>$ #smallcaps[OV] (Contrapositive):*
 We prove that if the #smallcaps[OV] Conjecture is false, then #smallcaps[SETH] is false.
@@ -99,24 +103,28 @@ Specifically, we show that if #smallcaps[OV] can be solved in time $cal(O)(N^(2-
 
 *Construction:*
 Let $phi = C_1 and ... and C_m$ be a $k$-#smallcaps[CNF] formula with $n$ variables.
-1.  Split variables into two sets $X_1 = {x_1, ..., x_(n/2)}$ and $X_2 = {x_(n/2+1), ..., x_n}$.
-2.  Construct set $A$ consisting of all $N = 2^(n/2)$ partial assignments $alpha: X_1 -> {0, 1}$.
-    For each $alpha$, create a vector $a^alpha in {0, 1}^m$ where $a^alpha [j] = 0$ if assignment $alpha$ *satisfies* clause $C_j$, and $1$ otherwise.
-3.  Construct set $B$ consisting of all $N = 2^(n/2)$ partial assignments $beta: X_2 -> {0, 1}$.
-    For each $beta$, create a vector $b^beta in {0, 1}^m$ where $b^beta [j] = 0$ if assignment $beta$ *satisfies* clause $C_j$, and $1$ otherwise.
+1. Split variables into two sets $X_1 = {x_1, ..., x_(n/2)}$ and $X_2 = {x_(n/2+1), ..., x_n}$.
+2. Construct set $A$ consisting of all $N = 2^(n/2)$ partial assignments $alpha: X_1 -> {0, 1}$.
+  For each $alpha$, create a vector $a^alpha in {0, 1}^m$ where $a^alpha [j] = 0$ if assignment $alpha$ *satisfies* clause $C_j$, and $1$ otherwise.
+3. Construct set $B$ consisting of all $N = 2^(n/2)$ partial assignments $beta: X_2 -> {0, 1}$.
+  For each $beta$, create a vector $b^beta in {0, 1}^m$ where $b^beta [j] = 0$ if assignment $beta$ *satisfies* clause $C_j$, and $1$ otherwise.
 
 *Correctness:*
 For any pair of partial assignments $alpha$ and $beta$, let $alpha circle.small beta$ be the full assignment.
-$ a^alpha dot b^beta = 0 &<=> forall j in {1, ..., m}: a^alpha [j] dot b^beta [j] = 0 \
-&<=> forall j: (a^alpha [j] = 0) or (b^beta [j] = 0) \
-&<=> forall j: (alpha text(" satisfies ") C_j) or (beta text(" satisfies ") C_j) \
-&<=> alpha circle.small beta text(" satisfies ") phi $
+$
+  a^alpha dot b^beta = 0 &<=> forall j in {1, ..., m}: a^alpha [j] dot b^beta [j] = 0 \
+  &<=> forall j: (a^alpha [j] = 0) or (b^beta [j] = 0) \
+  &<=> forall j: (alpha text(" satisfies ") C_j) or (beta text(" satisfies ") C_j) \
+  &<=> alpha circle.small beta text(" satisfies ") phi
+$
 Thus, $phi$ is satisfiable iff there exists a pair of vectors $a^alpha in A, b^beta in B$ that are orthogonal.
 
 *Complexity Analysis:*
 - Size of sets: $N = |A| = |B| = 2^(n/2)$.
 - Dimension: $d = m$. For $k$-SAT, $m = cal(O)(n^k)$.
 - If #smallcaps[OV] can be solved in $cal(O)(N^(2-delta))$, then satisfiability can be decided in:
-  $ T(n) = cal(O)(N^(2-delta) dot "poly"(d)) = cal(O)((2^(n/2))^(2-delta) dot "poly"(n)) = cal(O)(2^(n(1-delta/2)) dot "poly"(n)) $
+  $
+    T(n) = cal(O)(N^(2-delta) dot "poly"(d)) = cal(O)((2^(n/2))^(2-delta) dot "poly"(n)) = cal(O)(2^(n(1-delta/2)) dot "poly"(n))
+  $
 - This algorithm solves $k$-#smallcaps[SAT] in time $cal(O)(2^(c n))$ where $c = 1 - delta/2 < 1$.
 - Since this speedup $c$ depends only on the OV algorithm's $delta$ and not on $k$, it applies for all $k$. This implies $s_k \le 1 - delta/2$ for all $k$, so $lim_(k -> oo) s_k \le 1 - delta/2 < 1$, violating #smallcaps[SETH].

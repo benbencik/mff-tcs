@@ -131,13 +131,13 @@ We classify languages based on whether a Turing machine can accept or decide the
   2. If $M_1$ accepts, accept.
   3. If $M_2$ accepts, reject (since $w in overline(L) => w in.not L$).
 
-  Since $w$ must be in either $L$ or $overline(L)$, one of the machines will eventually accept, so $M$ always halts, therefore the lanaguage $L$ is decidable.
+  Since $w$ must be in either $L$ or $overline(L)$, one of the machines will eventually accept, so $M$ always halts, therefore the language $L$ is decidable.
 ]
 
 #corollary("Post's Theorem")[
   Class of decidable languages is trivially closed under complement, however class of partially decidable languages is not.
 
-  The language $L_u$ is partially decidable, becasue we can cosntruct an Universal Turing machine. If the language $overline(L_u)$ was partially decidable, then from the Post's theorem it would follow that $L_u$ is decidable. But we have already proven that $L_u$ is not decidable. Therefore the partially decidable languages are not closed under complement.
+  The language $L_u$ is partially decidable, because we can construct an Universal Turing machine. If the language $overline(L_u)$ was partially decidable, then from the Post's theorem it would follow that $L_u$ is decidable. But we have already proven that $L_u$ is not decidable. Therefore the partially decidable languages are not closed under complement.
 ]
 
 == Enumerators
