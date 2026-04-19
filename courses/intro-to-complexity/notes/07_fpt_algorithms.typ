@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Parameterized Complexity and #smallcaps[FPT]
 
-#question_B(
+#question(
   "(B8) Definition of FPT class and kernels, and kernelization of Vertex Cover",
 )[
   Define the #smallcaps[FPT] class and the concept of a kernel. Describe the kernelization algorithm for Vertex Cover.
@@ -87,7 +87,7 @@ The kernelization algorithm applies the following reduction rules exhaustively:
 The resulting kernel has size $cal(O)(k^2)$.
 
 
-#question_B(
+#question(
   "(B9) Bounded search tree Vertex Cover",
 )[
   Describe a parameterized algorithm for Vertex Cover based on bounded search trees with complexity lower than $cal(O)^*(2^k)$.

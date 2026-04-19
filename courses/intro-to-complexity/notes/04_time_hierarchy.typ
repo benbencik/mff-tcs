@@ -1,4 +1,4 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Time Complexity
 
@@ -16,7 +16,7 @@ Common time complexity classes:
 - #smallcaps[P] = $union.big_(k in bb(N)) #smallcaps("TIME") n^k$
 - #smallcaps[NP] = $union.big_(k in bb(N)) #smallcaps("NTIME") n^k$
 - #smallcaps[EXP] = $union.big_(k in bb(N)) #smallcaps("TIME") 2^(n^k)$
-#question_A("(A4) Deterministic Time Hierarchy")[
+#exam_question("(A4) Deterministic Time Hierarchy")[
   State and prove the Deterministic Time Hierarchy Theorem.
 ]
 
@@ -45,7 +45,7 @@ Similar to space, giving a machine more time allows it to solve strictly more pr
   - *Track 2 (State & Description):* Stores the description of $M$ and its current state $q$. 
   - *Track 3 (Timer):* Stores a binary counter initialized to $T = ceil(f(n) / log(f(n)))$.
 
-  #fig("time-hierarchy.png")
+  #fig("../courses/intro-to-complexity/figs/time-hierarchy.png")
 
   *Algorithm:*
   1. *Input Check:* $D$ checks if $x$ is of the form $chevron.l M chevron.r 10^*$. If not, $D$ *rejects*.
@@ -102,4 +102,4 @@ Similar to space, giving a machine more time allows it to solve strictly more pr
   Moreover for any $k in NN$ it holds that $#smallcaps[TIME] (n^k) subset #smallcaps[TIME] (2^n)$ thus $ #smallcaps[P] subset.neq #smallcaps[EXPTIME] $
 ]
 
-#fig("inclusions2.png")
+#fig("../courses/intro-to-complexity/figs/inclusions2.png")

@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Counting Complexity
 
-#question_B(
+#question(
   "(B10) #P class and #P-completeness, hardness of counting cycles in a graph",
 )[
   Define the class #smallcaps[#sym.hash P] and #smallcaps[#sym.hash P]-completeness. Discuss the hardness of counting cycles in a graph.
@@ -53,7 +53,7 @@ Counting the number of simple cycles in a directed graph is a #smallcaps[#sym.ha
   2. For each edge $(u, v) in E$, we substitute it with a directed acyclic subgraph connecting $u$ to $v$ that contains exactly $2^m$ distinct paths. This subgraph can be constructed using $m$ levels of branching nodes.
   3. Since the gadgets are acyclic, any simple cycle in $G'$ must correspond to a simple cycle in $G$ that traverses the gadgets corresponding to its edges.
 
-  #fig("counting-cycles.png")
+  #fig("../courses/intro-to-complexity/figs/counting-cycles.png")
 
   *Analysis:*
   Let $C$ be a simple cycle in $G$ of length $ell$. In $G'$, this cycle corresponds to a closed walk that passes through $ell$ gadgets. Since each gadget offers $2^m$ paths, this single cycle $C$ gives rise to $(2^m)^ell$ distinct simple cycles in $G'$.

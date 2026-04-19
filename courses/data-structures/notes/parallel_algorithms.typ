@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Parallel Algorithms & Concurrency
 
-#big_question("Locks, Atomics, ABA, Lock-free vs Lock-based")[
+#question("Locks, Atomics, ABA, Lock-free vs Lock-based")[
   Describe locks and atomic CAS and LL/SC operations. Design and analyze a lock-free stack. Explain the ABA problem and propose its solution. Compare the parallelization of data structures using locks versus using atomic operations (so-called lock-free data structures), explaining potential problems in both cases.
 ]
 
@@ -104,7 +104,7 @@ In lock-free structures, we cannot free nodes immediately after popping because 
   [Good for low contention.], [Good for high contention.],
 )
 
-#small_question("Parallel (a,b)-trees")[
+#question("Parallel (a,b)-trees")[
   Show how to parallelize an (a,b)-tree using locks.
 ]
 

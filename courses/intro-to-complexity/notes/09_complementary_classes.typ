@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Complementary Classes and co-#smallcaps[NP]
 
-#question_B("(B11) co-NP class and co-NP-completeness")[
+#exam_question("(B11) co-NP class and co-NP-completeness")[
   Define the class co-#smallcaps[NP] and co-#smallcaps[NP]-completeness. (Prove that TAUT is co-#smallcaps[NP]-complete.)
 ]
 

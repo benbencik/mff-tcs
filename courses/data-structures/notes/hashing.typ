@@ -1,9 +1,10 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
+
 #set heading(numbering: "1.")
 
 = Hashing
 
-#big_question("Hash Families & Chaining")[
+#question("Hash Families & Chaining")[
   Define c-universal and k-independent families of hash functions. Give examples where a c-universal family is not enough, but a k-independent family must be used. Formulate and prove the theorem about the expected chain length in hashing with chaining. Show examples of c-universal and k-independent families for hashing natural numbers. For one example, prove c-universality or k-independence, for k >= 2.
 ]
 
@@ -57,7 +58,7 @@ While c-universality suffices for chaining, stronger independence is needed else
 2. *Polynomial Hashing*: $h_t(x) = (sum t_i x^i mod p) mod m$. (k-independent, see @k-independent-hashing).
 3. *Tabulation Hashing*: We interpret the key $x$ as a vector of $c$ characters $x_1, ..., x_c$. We initialize $c$ fully random lookup tables $T_1, ..., T_c$, where each table maps a character to a random value in $[m]$. The hash value is computed as $h(x) = T_1[x_1] xor ... xor T_c[x_c]$. (3-independent)
 
-#big_question("Linear Probing")[
+#question("Linear Probing")[
   Describe and analyze hashing with linear probing using a fully random hash function and, e.g., one-third fill factor. Describe the advantages and disadvantages compared to other data structures, especially those based on hashing.
 ]
 
@@ -102,7 +103,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
 
 == Scalar Product Hashing <scalar-product-hashing>
 
-#small_question("Scalar Product Hashing")[
+#question("Scalar Product Hashing")[
   Describe a system of hash functions derived from scalar product. Prove that it is a 1-universal system from $ZZ_d^k$ to $ZZ_p$.
 ]
 
@@ -126,7 +127,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
 ]
 
 
-#small_question("Linear Congruence Hashing")[
+#question("Linear Congruence Hashing")[
   Describe a system of hash functions based on linear congruence. Prove that it is a 2-independent system from $ZZ_p$ to $[m]$ (you can use the lemma about modulo, which you should formulate but do not need to prove).
 ]
 
@@ -149,7 +150,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
 
 == k-independent Hashing <k-independent-hashing>
 
-#small_question("k-independent Hashing")[
+#question("k-independent Hashing")[
   Construct a k-independent system of hash functions from $ZZ_p$ to $[m]$. Justify k-independence (you can use the lemma about modulo, which you should formulate but do not need to prove).
 ]
 
@@ -170,7 +171,7 @@ Suppose that $m >= (1 + epsilon) dot n$. Then the expected number of probes duri
 
 == Rolling Hash <rolling-hash>
 
-#small_question("Rolling Hash (Strings)")[
+#question("Rolling Hash (Strings)")[
   Construct a 2-independent system hashing strings of length at most L over alphabet [a] to [m] based on polynomials, i.e., "rolling hash". Describe the advantage of using this system compared to other hash functions.
 ]
 
@@ -209,7 +210,7 @@ Advantages of the rolling hash:
 
 == Bloom Filters
 
-#small_question("Bloom Filters")[
+#question("Bloom Filters")[
   Describe and analyze a Bloom filter. Give an example of its practical use.
 ]
 

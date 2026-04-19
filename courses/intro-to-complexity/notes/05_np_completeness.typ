@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = NP and NP-Completeness
 
-#question_B("(B6) Two definitions of NP class and their equivalence")[
+#exam_question("(B6) Two definitions of NP class and their equivalence")[
   Provide two definitions of the class #smallcaps("NP") and prove their equivalence.
 ]
 
@@ -78,7 +78,7 @@ The complexity class #smallcaps[NP] (Nondeterministic Polynomial time) contains 
 
 == The Cook-Levin Theorem
 
-#question_A("(A5) Cook-Levin Theorem (NP-completeness of SAT)")[
+#exam_question("(A5) Cook-Levin Theorem (NP-completeness of SAT)")[
   State and prove the Cook-Levin Theorem.
 ]
 
@@ -99,7 +99,7 @@ The Cook-Levin Theorem provides the first #smallcaps[NP]-complete problem: SAT (
   - Each subsequent row represents the configuration after one step of computation.
   - We assume without loss of generality that if $M$ accepts, it does so in a configuration where the state is $q_{"accept"}$ (and we can pad the computation with trivial transitions to fill the tableau).
 
-  #fig("tablo.png")
+  #fig("../courses/intro-to-complexity/figs/tablo.png")
 
   *Variables:*
   We define variables $x_{i,j,s}$ for $1 lt.eq i, j lt.eq n^k$ and $s in S = Q union Sigma union {#sym.hash}$.

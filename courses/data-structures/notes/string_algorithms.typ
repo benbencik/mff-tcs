@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = String Algorithms
 
-#big_question("Suffix Array & LCP")[
+#question("Suffix Array & LCP")[
   Define a suffix array and an LCP array. Describe and analyze algorithms for their construction (for suffix arrays, almost linear time is sufficient). Describe an example problem that these arrays can solve effectively.
 ]
 
@@ -73,7 +73,7 @@ Find $P$ in $S$.
 
 == Longest Common Substring
 
-#small_question("Longest Common Substring")[
+#question("Longest Common Substring")[
   Show how to use a suffix array and an LCP array to find the longest common substring of two strings.
 ]
 

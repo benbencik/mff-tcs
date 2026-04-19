@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Advanced Topics
 
-#question_B(
+#question(
   "(B12) Pseudorandom generators, one-way functions and their connection to cryptography",
 )[
   Explain pseudorandom generators, one-way functions, and their connection to cryptography (symmetric encryption, bit-commitment).
@@ -74,7 +74,7 @@ Bit commitment is a cryptographic primitive where Alice can "commit" to a value 
 This scheme is hiding because $G(y)$ is indistinguishable from random, and binding because $G(y)$ and $G(y') plus.o r$ are unlikely to collide.
 
 
-#question_B(
+#question(
   "(B13) Example of fine-grained reduction (SETH to OV or OV to regex matching)",
 )[
   Provide an example of a fine-grained reduction, such as reducing SETH to Orthogonal Vectors.

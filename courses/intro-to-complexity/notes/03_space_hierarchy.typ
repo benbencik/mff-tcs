@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Space Complexity
 
-#question_B(
+#question(
   "(B4) Definition of space complexity classes",
 )[Define the basic space complexity classes and prove that $#smallcaps("NTIME") (f(n)) subset.eq #smallcaps("SPACE") (f(n))$.
 ]
@@ -60,7 +60,7 @@ There are fundamental relationships between the time and space resources require
 ]
 
 
-#question_B(
+#question(
   "(B5) Definition of basic complexity classes and proof of space-time relationship",
 )[Prove the relationship between space and time: $#smallcaps("NSPACE") (f(n)) subset.eq union.big_(c in bb(N)) #smallcaps("TIME") 2^(c f(n))$.
 ]
@@ -118,7 +118,7 @@ There are fundamental relationships between the time and space resources require
 ]
 
 
-#question_A("(A2) Savitch's Theorem")[
+#exam_question("(A2) Savitch's Theorem")[
   State and prove Savitch's Theorem.
 ]
 
@@ -163,7 +163,7 @@ Savitch's Theorem shows that nondeterminism does not provide an exponential adva
     return false
   ]
   ```
-  #fig("savitch.png")
+  #fig("../courses/intro-to-complexity/figs/savitch.png")
 
   The deterministic Turing machine $D$ starts by calling $"REACH" (C_{"start"}, C_{"acc"}, N)$, where $N = 2^(c f(n))$ is an upper bound on the number of steps.
 
@@ -210,7 +210,7 @@ Before stating the Space Hierarchy Theorem, we need to define the concept of spa
 
 Commonly used functions for measuring space complexity are space-constructible, for example: $log n$, $n$, $n^k$ (polynomials), $2^n$ (esponentials).
 
-#question_A("(A3) Deterministic Space Hierarchy")[
+#exam_question("(A3) Deterministic Space Hierarchy")[
   State and prove the Deterministic Space Hierarchy Theorem.
 ]
 

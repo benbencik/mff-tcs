@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 == BB[α]-Trees
 
-#small_question("BB[α]-Trees")[
+#question("BB[α]-Trees")[
   Describe search trees with lazy balancing (BB[α]-trees). Analyze their amortized complexity. Give an example of their use.
 ]
 

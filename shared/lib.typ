@@ -54,7 +54,7 @@
 // ============================================================
 
 #let fig(filename, width: 75%, caption: none) = {
-  let img = image("figs/" + filename, width: width)
+  let img = image(filename, width: width)
   if caption != none {
     figure(
       img,
@@ -172,7 +172,21 @@
 }
 
 
-#let question_A(title, body) = {
+#let question(title, body) = {
+  block(
+    stroke: rgb("#ffd399"),
+    fill: rgb("#fffbe6"),
+    inset: 1em,
+    radius: 5pt,
+    width: 100%,
+    [
+      *#title* \
+      #emph(body)
+    ],
+  )
+}
+
+#let exam_question(title, body) = {
   block(
     stroke: rgb("#ff9999"),
     fill: rgb("#fff3f3"),
@@ -186,10 +200,10 @@
   )
 }
 
-#let question_B(title, body) = {
+#let example(title, body) = {
   block(
-    stroke: rgb("#ffd399"),
-    fill: rgb("#fffbe6"),
+    stroke: rgb("#a3c779"),
+    fill: rgb("#e7ffe6"),
     inset: 1em,
     radius: 5pt,
     width: 100%,

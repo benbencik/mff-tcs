@@ -1,4 +1,4 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Treewidth
 

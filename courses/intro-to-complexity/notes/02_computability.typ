@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Computability and Decidability
 
-#question_B(
+#question(
   "(B1) Universal Turing Machine and undecidability of the universal language",
 )[
   Define the Universal Turing Machine and prove the undecidability of the universal language $L_u$.
@@ -43,7 +43,7 @@ The language $L_u$ corresponds to the problem of checking whether a given TM $M$
   $
   $ text("DIAG") = { w_i | w_i in.not L(M_i) } $ (identifying $w_i$ with $chevron.l M_i chevron.r$)
 
-  #fig("diag-lang.png")
+  #fig("../courses/intro-to-complexity/figs/diag-lang.png")
 
   The proof proceeds in two steps:
   1. Show that $text("DIAG")$ is not partially decidable.
@@ -88,7 +88,7 @@ The language $L_u$ corresponds to the problem of checking whether a given TM $M$
   This is a contradiction. Therefore, $L_u$ is not decidable.
 ]
 
-#question_B("(B3) Properties of decidable and partially decidable languages")[
+#exam_question("(B3) Properties of decidable and partially decidable languages")[
   Discuss the properties of decidable and partially decidable languages (closure properties, Post's theorem, enumerators).
 ]
 
@@ -176,7 +176,7 @@ We classify languages based on whether a Turing machine can accept or decide the
 ]
 
 
-#question_A("(A1) Rice's Theorem")[
+#exam_question("(A1) Rice's Theorem")[
   State and prove Rice's Theorem using m-reducibility.
 ]
 
@@ -220,7 +220,7 @@ It holds that if $A scripts(<=)_m B$ and the language $B$ is (partially decidabl
   3. If $M_1$ accepts $y$, then accept.
   4. Otherwise, reject
 
-  #fig("rice-theorem.png")
+  #fig("../courses/intro-to-complexity/figs/rice-theorem.png")
 
   *Correctness:*
   - If $M$ accepts $x$ ($x in L(M)$): The simulation proceeds to step 2, and $M'$ behaves exactly like $M_1$. Thus $L(M') = L(M_1) = L_1$. Since $L_1 in cal(C)$, we have $chevron.l M' chevron.r in L_cal(C)$.

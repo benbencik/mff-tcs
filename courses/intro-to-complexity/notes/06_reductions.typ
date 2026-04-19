@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Polynomial-Time Reductions
 
-#question_B("(B7) Polynomial reduction from 3-SAT to Vertex Cover")[
+#exam_question("(B7) Polynomial reduction from 3-SAT to Vertex Cover")[
   Describe the polynomial-time reduction from 3-SAT to Vertex Cover.
 ]
 
@@ -23,7 +23,7 @@ It also holds that the relation $scripts(<=)_m^p$ is reflexive and transitive.
 
 Currently we know the following relationships between classes.
 
-#fig("inclusions.png")
+#fig("../courses/intro-to-complexity/figs/inclusions.png")
 
 == Reduction from 3-SAT to Vertex Cover
 
@@ -49,7 +49,7 @@ We show that Vertex Cover is #smallcaps[NP]-complete by reducing 3-SAT to it.
   3. *Connecting Gadgets:* Add edges connecting the variable gadget nodes to the corresponding nodes in the clause gadgets.
     - If clause $C_j$ contains literal $x_i$, connect the node $x_i$ in the variable gadget to the node $x_i$ in the clause gadget for $C_j$.
 
-  #fig("3sat-vc.png")
+  #fig("../courses/intro-to-complexity/figs/3sat-vc.png")
 
   *Setting k:*
   Set $k = n + 2m$.

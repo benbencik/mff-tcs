@@ -1,4 +1,4 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Kernelization
 
@@ -63,7 +63,7 @@ Crown decomposition is a powerful technique to find polynomial kernels by exploi
   4. There exists a matching $M$ of $H$ into $C$ (meaning $M$ saturates all vertices in $H$).
 ])
 
-#fig("crown-decomposition.png", width: 50%)
+#fig("../courses/parametrized-algorihms/figs/crown-decomposition.png", width: 50%)
 
 #theorem("Kőnig's Theorem", [
   In any undirected bipartite graph, the size of a maximum matching equals the size of a minimum #smallcaps("Vertex Cover").

@@ -1,9 +1,9 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Balanced Search Trees
 
 == (a,b)-Trees
-#big_question("(a,b)-Tree")[
+#question("(a,b)-Tree")[
   Define an (a,b)-tree. Describe how the Find, Insert, and Delete operations work on it. State and prove the theorem about the amortized number of node changes for Insert and Delete operations on (a,2a)-trees. How does this differ for (a,2a-1)-trees? Describe the advantages and disadvantages compared to other data structures, especially balanced binary search trees.
 ]
 
@@ -39,7 +39,7 @@
 9.   Create new root with 1 key and 2 children
 ```
 
-#fig("ab-split.png")
+#fig("../courses/data-structures/figs/ab-split.png")
 
 *Delete(x)*:
 ```
@@ -57,9 +57,9 @@
 12.   Delete root, child becomes new root
 ```
 
-#fig("ab-merge.png")
+#fig("../courses/data-structures/figs/ab-merge.png")
 
-#fig("ab-borrow.png", width: 70%)
+#fig("../courses/data-structures/figs/ab-borrow.png", width: 70%)
 
 #table(
   columns: (1fr, 1fr),
@@ -130,7 +130,7 @@ While worst-case modification cost is $O(log n)$, the amortized cost of structur
 - Consequently, the amortized cost per operation is $Omega(log n)$, not $O(1)$.
 - To fix this, we can allow $b >= 2a$, creating a "breathing space" between split and merge thresholds.
 
-#small_question("Depth of (a,b)-trees")[
+#question("Depth of (a,b)-trees")[
   Analyze the depth of (a,b)-trees.
 ]
 

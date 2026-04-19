@@ -18,12 +18,12 @@ Typst is very user friendly. Like if markdown and latex had a baby. They have go
 
 ```bash
 cd courses/data-structures
-typst compile main.typ data-structures.pdf
+typst compile --root ../.. main.typ data-structures.pdf
 ```
 
 Or with watch mode for continuous updates:
 ```bash
-typst watch main.typ data-structures.pdf
+typst watch --root ../.. main.typ data-structures.pdf
 ```
 
-All notes use the local `lib.typ` for consistent styling and notation.
+All notes use the shared `shared/lib.typ` for consistent styling and notation.

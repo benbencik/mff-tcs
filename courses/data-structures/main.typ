@@ -1,4 +1,5 @@
-#import "lib.typ": *
+#import "../../shared/lib.typ": *
+
 #set heading(numbering: "1.1.")
 
 #set document(

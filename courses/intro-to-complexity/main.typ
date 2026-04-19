@@ -1,4 +1,5 @@
-#import "lib.typ": *
+#import "../../shared/lib.typ": *
+
 
 #set document(
   title: "Introduction to Complexity and Computability: Lecture Notes",

@@ -1,4 +1,4 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Amortized Analysis
 
@@ -32,7 +32,7 @@ $
 Thus, if we can bound each $hat(C)_i$, we bound the total cost.
 
 == Application: Dynamic Arrays
-#small_question("Dynamic Array")[
+#question("Dynamic Array")[
   Describe a dynamic array, i.e., an "inflatable array" with growing and shrinking. Analyze its amortized complexity.
 ]
 

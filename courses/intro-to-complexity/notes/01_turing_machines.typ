@@ -1,4 +1,4 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Turing Machines and Computation Models
 
@@ -42,7 +42,7 @@ All these variants are equivalent in power to the standard single-tape determini
 ]
 
 
-#question_B("(B2) RAM and equivalence with Turing machines")[
+#exam_question("(B2) RAM and equivalence with Turing machines")[
   Explain the Random Access Machine (RAM) model and prove its equivalence with Turing machines.
 ]
 

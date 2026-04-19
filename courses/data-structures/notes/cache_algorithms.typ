@@ -1,13 +1,13 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Cache Algorithms
 
 
-#big_question("I/O Model & Sleator-Tarjan Theorem")[
+#question("I/O Model & Sleator-Tarjan Theorem")[
   Define the I/O model for cache management and compare cache-aware and cache-oblivious algorithms. State and prove Sleator-Tarjan's theorem on LRU competitiveness. Describe the contribution of this theorem to the analysis of cache-oblivious algorithms.
 ]
 
-#fig("../figs/io-model.png")
+#fig("../courses/data-structures/figs/io-model.png")
 
 #definition("I/O Model (External Memory Model)")[
   Also known as the *External Memory Model*, it models algorithms processing data too large for main memory.
@@ -71,11 +71,11 @@
 Cache-oblivious algorithms are analyzed assuming an optimal cache replacement strategy. This theorem guarantees that if $M_"LRU" = 2 M_"OPT"$ then the LRU strategy is 2-competitive with the optimal caching strategy.
 
 == Matrix Transposition ($N times N$)
-#small_question("Matrix Transposition")[
+#question("Matrix Transposition")[
   Formulate a cache-oblivious algorithm for square matrix transposition. Analyze its time complexity and I/O complexity.
 ]
 
-#fig("matrix-transpose.png", width: 60%)
+#fig("../courses/data-structures/figs/matrix-transpose.png", width: 60%)
 
 1. *Cache-Aware Algorithm (Tiling)*:
   ```
@@ -122,7 +122,7 @@ Cache-oblivious algorithms are analyzed assuming an optimal cache replacement st
 
 
 == k-way Mergesort
-#small_question("k-way Mergesort (Cache-Aware)")[
+#question("k-way Mergesort (Cache-Aware)")[
   Analyze k-way Mergesort in a cache-aware model. What is the optimal choice of k?
 ]
 

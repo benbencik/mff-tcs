@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 == Splay Trees
 
-#big_question("Splay Tree")[
+#question("Splay Tree")[
   Define a Splay tree. Describe how the Splay, Find, Insert, and Delete operations work on it. Describe the advantages and disadvantages compared to other data structures, especially balanced search trees. State and prove the theorem about the amortized complexity of the Splay operation.
 ]
 
@@ -14,7 +14,7 @@
 
 The core operation is *Splay(x)*, which moves node $x$ to the root using a sequence of rotations.
 
-#fig("splay-rotatios.png", width: 80%)
+#fig("../courses/data-structures/figs/splay-rotatios.png", width: 80%)
 
 *Splay(x)*: Depending on the structure of the tree around $x$, we perform one of three steps until $x$ is the root:
 - *Zig Step*: Standard single rotation executed when $"parent"(x)$ is the root.
@@ -44,7 +44,7 @@ For any positive $alpha, beta$ it holds $log(alpha) + log(beta) <= 2log(alpha + 
 
 From the image below for concave functions it holds that $(log(alpha) + log(beta)) / 2 <= log((alpha + beta) / 2)$. Since $log((alpha + beta) / 2) = log(alpha+beta)-1$ we get the above claim.
 
-#fig("splay-lemma.png", width: 80%)
+#fig("../courses/data-structures/figs/splay-lemma.png", width: 80%)
 
 #theorem("Access Lemma")[
   The amortized cost of the `Splay(x)` operation is at most $3(r(root) - r(x)) + 1 = O(log n)$, where $r(x)$ is the rank of node $x$.
@@ -83,7 +83,7 @@ From the image below for concave functions it holds that $(log(alpha) + log(beta
 ]
 
 
-#small_question("Splay Operations (Design & Analysis)")[
+#question("Splay Operations (Design & Analysis)")[
   Design Find, Insert, and Delete operations on a Splay tree. Analyze their amortized complexity. It is sufficient to state the theorem about the complexity of the Splay operation, you do not need to prove it.
 ]
 

@@ -1,8 +1,8 @@
-#import "../lib.typ": *
+#import "../../../shared/lib.typ": *
 
 = Range Trees & k-d Trees
 
-#big_question("Multi-dimensional Range Trees")[
+#question("Multi-dimensional Range Trees")[
   Define multi-dimensional interval trees (range trees). Analyze the space complexity of the data structure and the time complexity of construction and rectangular queries (bonus: including acceleration by fractional cascading).
 ]
 
@@ -47,7 +47,7 @@ How the query works:
 - *Improved Query Time*: $O(log^(d-1) n + k)$. (e.g., $O(log n + k)$ for 2D).
 
 
-#small_question("k-d Trees")[
+#question("k-d Trees")[
   Define k-d trees and show that 2-d interval queries take $Omega(sqrt(n))$.
 ]
 
@@ -70,7 +70,7 @@ How the query works:
 ]
 
 
-#small_question("Dynamic Range Trees")[
+#question("Dynamic Range Trees")[
   Show how to dynamize two-dimensional interval trees (i.e., Range trees); Insert is sufficient.
 ]
 
