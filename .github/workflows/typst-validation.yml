@@ -1,0 +1,136 @@
+# Typst Validation Workflow
+#
+# This workflow validates Typst (.typ) files in the repository for:
+# 1. Syntax errors - by compiling each main.typ file
+# 2. Missing figure references - by checking that all referenced images exist
+#
+# Runs on:
+# - Push to main branch (when .typ files change)
+# - Pull requests to main branch (when .typ files change)
+#
+# The workflow ensures that:
+# - All Typst files compile without syntax errors
+# - All image/figure references point to existing files
+
+name: Typst Validation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.typ'
+      - '.github/workflows/typst-validation.yml'
+      - '.github/workflows/validate-figures.py'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.typ'
+      - '.github/workflows/typst-validation.yml'
+      - '.github/workflows/validate-figures.py'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install Typst
+      run: |
+        # Install Typst CLI
+        curl -fsSL https://typst.app/install.sh | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    
+    - name: Verify Typst installation
+      run: |
+        export PATH="$HOME/.local/bin:$PATH"
+        typst --version
+    
+    - name: Find and compile Typst files
+      run: |
+        export PATH="$HOME/.local/bin:$PATH"
+        
+        echo "=== Typst Syntax Validation ==="
+        echo ""
+        
+        # Find all main.typ files in course directories
+        MAIN_FILES=$(find courses -type f -name "main.typ" | sort)
+        
+        if [ -z "$MAIN_FILES" ]; then
+          echo "No main.typ files found in courses directory"
+          exit 0
+        fi
+        
+        TOTAL=0
+        FAILED=0
+        FAILED_FILES=""
+        
+        for file in $MAIN_FILES; do
+          TOTAL=$((TOTAL + 1))
+          COURSE_DIR=$(dirname "$file")
+          echo "----------------------------------------"
+          echo "Compiling: $file"
+          echo "Directory: $COURSE_DIR"
+          
+          # Change to the course directory for compilation (to handle relative imports)
+          cd "$COURSE_DIR"
+          BASENAME=$(basename "$file")
+          
+          # Try to compile the file
+          if typst compile "$BASENAME" --diagnostic-format human 2>&1; then
+            echo "✅ Success: $file"
+          else
+            echo "❌ Failed: $file"
+            FAILED=$((FAILED + 1))
+            FAILED_FILES="$FAILED_FILES\n  - $file"
+          fi
+          
+          # Return to repository root
+          cd - > /dev/null
+          echo ""
+        done
+        
+        echo "========================================"
+        echo "Compilation Summary:"
+        echo "  Total files checked: $TOTAL"
+        echo "  Successful: $((TOTAL - FAILED))"
+        echo "  Failed: $FAILED"
+        echo "========================================"
+        
+        if [ $FAILED -gt 0 ]; then
+          echo ""
+          echo "Failed files:"
+          echo -e "$FAILED_FILES"
+          echo ""
+          echo "::error::Typst compilation failed for $FAILED file(s)"
+          exit 1
+        fi
+        
+        echo ""
+        echo "✅ All Typst files compiled successfully!"
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+    
+    - name: Validate figure references
+      run: |
+        echo ""
+        echo "=== Figure Reference Validation ==="
+        echo ""
+        
+        python3 .github/workflows/validate-figures.py
+    
+    - name: Summary
+      if: success()
+      run: |
+        echo ""
+        echo "================================================"
+        echo "✅ All validations passed!"
+        echo "  - Typst syntax validation: PASSED"
+        echo "  - Figure reference validation: PASSED"
+        echo "================================================"
