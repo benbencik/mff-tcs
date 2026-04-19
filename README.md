@@ -1,6 +1,8 @@
-# Master's Studies Notes
+# TCS Master's Notes
 
 Comprehensive notes repository for master's studies, structured by course and topic.
+
+![cover image](tcs-garden.png)
 
 ## Structure
 
